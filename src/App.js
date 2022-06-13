@@ -11,6 +11,7 @@ import MainLayout from './layouts/MainLayout';
  */
 import PlanningView from './pages/Planning';
 import ContactView from './pages/Contact';
+import StudentTeacherView from './pages/Notes/Teacher/Student'
 import LoginView from './pages/Login';
 import TeacherLayout from './layouts/Notes/Teacher/TeacherLayout';
 import NotesTeacherDashboardView from './pages/Notes/Teacher/Dashboard';
@@ -34,23 +35,28 @@ const App = () => {
    */
   const routes = useRoutes([
     {
-      path: '', element: <MainLayout />, children: [
-        { path : '*', element : <PageNotFoundView />},
-        { path: '', element: <LoginView /> },
-        { path: 'planning', element: <PlanningView /> },
-        { path: 'login', element: <LoginView /> },
+      path: "",
+      element: <MainLayout />,
+      children: [
+        { path: "*", element: <PageNotFoundView /> },
+        { path: "", element: <LoginView /> },
+        { path: "planning", element: <PlanningView /> },
+        { path: "login", element: <LoginView /> },
         //{ path: 'contact', elemnt: <ContactView /> },
         {
-          path: 'gestion-des-notes', element: <TeacherLayout />, children: [
-            { path: '', element: <Navigate to="creation" /> },
-            { path: 'creation', element: <NotesTeacherCreateView /> }, 
-            { path: 'visualisation', element : <NotesTeacherDashboardView/>}
-          ]
-        }
+          path: "gestion-des-notes",
+          element: <TeacherLayout />,
+          children: [
+            { path: "", element: <Navigate to="creation" /> },
+            { path: "creation", element: <NotesTeacherCreateView /> },
+            { path: "creation/:id", element: <StudentTeacherView /> },
 
-      ]
-    }
-  ])
+            { path: "visualisation", element: <NotesTeacherDashboardView /> },
+          ],
+        },
+      ],
+    },
+  ]);
 
   React.useEffect(() => {
     document.title = "Estiam Pronote"
