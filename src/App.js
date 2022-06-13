@@ -9,6 +9,8 @@ import MainLayout from './layouts/MainLayout';
 /**
  * Views
  */
+
+//theo//
 import PlanningView from './pages/Planning';
 import ContactView from './pages/Contact';
 import LoginView from './pages/Login';
