@@ -28,6 +28,11 @@ code {
   font-weight: bold;
   text-decoration: none;
   padding: 0.5vw;
+  transition-duration: 0.2s;
+}
+
+.estiam-navbar a:hover { 
+  color : #9955ee;
 }
 
 .estiam-btn { 
