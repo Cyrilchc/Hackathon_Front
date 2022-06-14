@@ -17,22 +17,22 @@ export const AppNavbar = () => {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Item>
-                            <Nav.Link href="planning">Emploi du temps</Nav.Link>
+                            <Link to="planning">Emploi du temps</Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link href="gestion-des-notes">Notes</Nav.Link>
+                            <Link to="gestion-des-notes">Notes</Link>
                         </Nav.Item>
                     </Nav>
                 </Navbar.Collapse>
                 <Nav>
                     <Nav.Item>
-                        <Nav.Link href="/settings">Parametres</Nav.Link>
+                        <Link to="/settings">Parametres</Link>
                     </Nav.Item>
                     <Nav.Item>
-                        <Nav.Link href="/contact">Contacter</Nav.Link>
+                        <Link to="/contact">Contacter</Link>
                     </Nav.Item>
                     <Nav.Item>
-                        <Nav.Link href="/login">Se connecter</Nav.Link>
+                        <Link to="/login">Se connecter</Link>
                     </Nav.Item>
                 </Nav>
             </Container>

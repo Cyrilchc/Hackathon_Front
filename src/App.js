@@ -10,9 +10,7 @@ import MainLayout from './layouts/MainLayout';
  * Views
  */
 
-
-
-//Alex//
+//theo//
 import PlanningView from './pages/Planning';
 import ContactView from './pages/Contact';
 import LoginView from './pages/Login';
@@ -44,7 +42,6 @@ const App = () => {
         { path: 'planning', element: <PlanningView /> },
         { path: 'login', element: <LoginView /> },
         { path: 'contact', element: <ContactView /> },
-      
         { path: 'settings', element: <SettingsView /> },
 
         {
