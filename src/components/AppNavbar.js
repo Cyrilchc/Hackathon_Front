@@ -7,7 +7,7 @@ export const AppNavbar = () => {
 
 
     return (
-        <Navbar className="estiam-navbar" variant="dark">
+        <Navbar className="estiam-navbar" variant="white">
             <Container fluid>
                 <Navbar.Brand>
                     <Link to="/">
@@ -17,22 +17,22 @@ export const AppNavbar = () => {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Item>
-                            <Link to="planning">Emploi du temps</Link>
+                            <Nav.Link href="planning">Emploi du temps</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Link to="gestion-des-notes">Notes</Link>
+                            <Nav.Link href="gestion-des-notes">Notes</Nav.Link>
                         </Nav.Item>
                     </Nav>
                 </Navbar.Collapse>
                 <Nav>
                     <Nav.Item>
-                        <Link to="/settings">Parametres</Link>
+                        <Nav.Link href="/settings">Parametres</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                        <Link to="/contact">Contacter</Link>
+                        <Nav.Link href="/contact">Contacter</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                        <Link to="/login">Se connecter</Link>
+                        <Nav.Link href="/login">Se connecter</Nav.Link>
                     </Nav.Item>
                 </Nav>
             </Container>
