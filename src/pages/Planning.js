@@ -1,5 +1,5 @@
 import React from 'react'
-
+import axios from 'axios'
 /**
  * Bootstrap components
  */
@@ -19,6 +19,7 @@ import { Navigate, useNavigate } from 'react-router-dom'
  */
 import { AuthService } from '../services/auth.service.js'
 import { CalendarService } from '../services/calendar.service.js'
+import { event } from 'jquery'
 
 
 /**
@@ -31,12 +32,25 @@ const PlanningView = () => {
 
     const userConnected = AuthService.handleConnection()
     const navigate = useNavigate()
-    /**
-     * Hooks d'etat
-     */
+
     const [data, setData] = React.useState([])
 
+ 
+    // const fetchData = async () => await CalendarService.index().then(res => setData(res));
 
+
+    const id = () => {
+        
+    }
+    
+
+    React.useEffect(() => {
+        axios.get(`http://192.168.43.181:5000/api/Appointment/4`).then((res) => {
+            console.log(res.data);
+            setData(res.data);
+        });
+        // fetchData();
+    }, []);
 
     const events =  [
         {
@@ -51,35 +65,10 @@ const PlanningView = () => {
         // more events ...
       ]
     /**
-     * FONCTIONS
-     * - fetchData est une fonction asynchrone qui permet via le service <Nom_du_service> dans le dossier service d'appeler une fonction qui requete le serveur et recupere les donnees
-     * - 
-     */
-    const fetchData = async () => await CalendarService.index().then(res => setData(res));
-
-    // HOOK D'EFFET
-    /* 
-        Le hook d'effet permet l'execution d'effets de bord dans les fonctions composants
-    */
-    React.useEffect(() => {
-        /**
-         * Si userConnected est vide et la variable navigate existe
-         */
-        if(!userConnected && navigate) {
-            navigate('/login')
-        }
-        else {
-            fetchData()
-        }
-    }, [userConnected, navigate])
-
-
-    /**
      * RENDERING
      * C'est la partie qui renvoie du HTML lorsque le composant est cree
      * condition : si userConnected n'est pas vide
      */
-    if(userConnected)
     return (
         <Container fluid>
             <Row>
@@ -95,9 +84,9 @@ const PlanningView = () => {
                     <Container className="p-3">
                         <FullCalendar
                             plugins={[dayGridPlugin]}
-                            initialView="dayGridMonth"
-                            weekends={false}        
-                            events={events}
+                            initialView="dayGridWeek"
+                            weekends={true}        
+                            events={data}
                         />
                     </Container>
                 </Col>
@@ -130,7 +119,6 @@ const PlanningView = () => {
             </Row>
         </Container>
     )
-    else return null
 }
 
 
