@@ -41,9 +41,9 @@ const App = () => {
         { path: '', element: <LoginView /> },
         { path: 'planning', element: <PlanningView /> },
         { path: 'login', element: <LoginView /> },
-        { path: 'contact', elemnt: <ContactView /> },
-        { path: 'contact', elemnt: <ContactView /> },
-        { path: 'settings', elemnt: <SettingsView /> },
+        { path: 'contact', element: <ContactView /> },
+      
+        { path: 'settings', element: <SettingsView /> },
 
         {
           path: 'gestion-des-notes', element: <TeacherLayout />, children: [
