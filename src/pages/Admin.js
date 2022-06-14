@@ -1,12 +1,17 @@
 import React from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
+/**
+ * Bootstrap components
+ */
+import { Container, Row, Col, Form, Button} from "react-bootstrap";
 
 const AdminView = () => { 
 
     return ( 
         <Container>
+            <h3>Administration</h3>
+            <hr />
             <Row>
-                <Col>admin</Col> 
+                <Col>Bienvenue sur la page d'administration</Col> 
                 <Col></Col>
             </Row>
         </Container>
