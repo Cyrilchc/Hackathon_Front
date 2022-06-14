@@ -10,7 +10,7 @@ export const AppNavbar = () => {
         <Navbar className="estiam-navbar" variant="white">
             <Container fluid>
                 <Navbar.Brand>
-                    <Link to="/">
+                    <Link to="home">
                         <Image src={logo} width={150} />
                     </Link>
                 </Navbar.Brand>

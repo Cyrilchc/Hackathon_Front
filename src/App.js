@@ -19,7 +19,9 @@ import NotesTeacherDashboardView from './pages/Notes/Teacher/Dashboard';
 import NotesTeacherCreateView from './pages/Notes/Teacher/Create';
 import PageNotFoundView from './pages/PageNotFound';
 import SettingsView from './pages/Settings'; 
+import HomeView from './pages/Home';
 import { Navigate } from 'react-router-dom';
+
 
 /**
  * App component
@@ -43,6 +45,7 @@ const App = () => {
         { path: 'login', element: <LoginView /> },
         { path: 'contact', element: <ContactView /> },
         { path: 'settings', element: <SettingsView /> },
+        { path: 'home', element: <HomeView /> }, 
 
         {
           path: 'gestion-des-notes', element: <TeacherLayout />, children: [
