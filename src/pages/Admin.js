@@ -34,7 +34,11 @@ const AdminView = () => {
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Rôle<span class="obligatoire">*</span></Form.Label>
-                            <Form.Control placeholder="Rôle"/>
+                            <Form.Select>
+                                <option selected>Selectionner une option...</option>
+                                <option value="1">Professeur</option>
+                                <option value="2">Eleve</option>
+                            </Form.Select>
                         </Form.Group>
                     </Form>
                     <Button className='estiam-btn'>ANNULER</Button>
