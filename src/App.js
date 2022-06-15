@@ -20,6 +20,7 @@ import NotesTeacherCreateView from './pages/Notes/Teacher/Create';
 import PageNotFoundView from './pages/PageNotFound';
 import SettingsView from './pages/Settings'; 
 import HomeView from './pages/Home';
+import AdminView from './pages/Admin'
 import { Navigate } from 'react-router-dom';
 
 
@@ -46,6 +47,7 @@ const App = () => {
         { path: 'contact', element: <ContactView /> },
         { path: 'settings', element: <SettingsView /> },
         { path: 'home', element: <HomeView /> }, 
+        { path: 'admin', element: <AdminView /> }, 
 
         {
           path: 'gestion-des-notes', element: <TeacherLayout />, children: [
