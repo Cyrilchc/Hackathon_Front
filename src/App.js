@@ -17,6 +17,9 @@ import LoginView from './pages/Login';
 import TeacherLayout from './layouts/Notes/Teacher/TeacherLayout';
 import NotesTeacherDashboardView from './pages/Notes/Teacher/Dashboard';
 import NotesTeacherCreateView from './pages/Notes/Teacher/Create';
+import TchatCreate from './pages/Tchat/Create';
+import TchatUpdate from './pages/Tchat/Update';
+import Tchat from './pages/Tchat/Tchat';
 import PageNotFoundView from './pages/PageNotFound';
 import SettingsView from './pages/Settings'; 
 import HomeView from './pages/Home';
@@ -46,11 +49,17 @@ const App = () => {
         { path: '', element: <LoginView /> },
         { path: 'planning', element: <PlanningView /> },
         { path: 'login', element: <LoginView /> },
+        { path: 'tchat', children: [
+          { path: '*', element: <Tchat />},
+          { path: 'create', element: <TchatCreate />},
+          { path: 'update', children: [
+            { path: '*', element: <TchatUpdate />},
+          ]},
+        ]},
         { path: 'contact', element: <ContactView /> },
         { path: 'settings', element: <SettingsView /> },
         { path: 'home', element: <HomeView /> }, 
-        { path: 'admin', element: <AdminView /> }, 
-
+        { path: 'admin', element: <AdminView /> },
         {
           path: 'gestion-des-notes', element: <TeacherLayout />, children: [
             { path: '', element: <Navigate to="creation" /> },
