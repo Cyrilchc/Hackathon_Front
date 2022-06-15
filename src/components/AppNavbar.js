@@ -41,6 +41,7 @@ export const AppNavbar = () => {
                         <Link to="/login">Se connecter</Link>
                     </Nav.Item>
                 </Nav>
+                
             </Container>
         </Navbar >
     )
