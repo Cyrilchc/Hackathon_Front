@@ -9,6 +9,8 @@ import MainLayout from './layouts/MainLayout';
 /**
  * Views
  */
+
+//theo//
 import PlanningView from './pages/Planning';
 import ContactView from './pages/Contact';
 import LoginView from './pages/Login';
@@ -19,6 +21,9 @@ import TchatCreate from './pages/Tchat/Create';
 import TchatUpdate from './pages/Tchat/Update';
 import Tchat from './pages/Tchat/Tchat';
 import PageNotFoundView from './pages/PageNotFound';
+import SettingsView from './pages/Settings'; 
+import HomeView from './pages/Home';
+import AdminView from './pages/Admin'
 import { Navigate } from 'react-router-dom';
 
 
@@ -26,6 +31,8 @@ import { Navigate } from 'react-router-dom';
  * App component
  * @returns 
  */
+
+//test
 const App = () => {
   /**
    * routes 
@@ -49,7 +56,10 @@ const App = () => {
             { path: '*', element: <TchatUpdate />},
           ]},
         ]},
-        //{ path: 'contact', elemnt: <ContactView /> },
+        { path: 'contact', element: <ContactView /> },
+        { path: 'settings', element: <SettingsView /> },
+        { path: 'home', element: <HomeView /> }, 
+        { path: 'admin', element: <AdminView /> },
         {
           path: 'gestion-des-notes', element: <TeacherLayout />, children: [
             { path: '', element: <Navigate to="creation" /> },
