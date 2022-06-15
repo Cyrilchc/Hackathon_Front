@@ -64,10 +64,9 @@ const PlanningView = () => {
             groupID: 1,
             //userId: userConnected.id,
         }).then((res) => {
-
             console.log(res);
-            if (res.request.status === 200) {
-                alert("Appointment ajoutée avec succès");
+            if (res.request.status === 204) {
+                alert("Horaire ajoutée avec succès");
                 window.location.reload();
             }
         });
