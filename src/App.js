@@ -12,6 +12,7 @@ import MainLayout from './layouts/MainLayout';
 
 //theo//
 import PlanningView from './pages/Planning';
+import PlanningViewStudent from './pages/PlanningStudent';
 import ContactView from './pages/Contact';
 import StudentTeacherView from './pages/Notes/Teacher/Student'
 import LoginView from './pages/Login';
@@ -50,6 +51,7 @@ const App = () => {
         { path : '*', element : <PageNotFoundView />},
         { path: '', element: <LoginView /> },
         { path: 'planning', element: <PlanningView /> },
+        { path: 'planningStudent', element: <PlanningViewStudent /> },
         { path: 'login', element: <LoginView /> },
         { path: 'tchat', children: [
           { path: '', element: <TchatAccueil type="ded"/>},

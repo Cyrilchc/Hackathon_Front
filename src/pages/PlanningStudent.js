@@ -26,7 +26,7 @@ import { event } from 'jquery'
  * C'est le composant page qui est appele par le ReactRouter pour l'url /planning
  * @returns 
  */
-const PlanningView = () => {
+const PlanningViewStudent = () => {
 
 
     const userConnected = AuthService.handleConnection()
@@ -101,42 +101,6 @@ const PlanningView = () => {
                             />
                         </Container>
                     </Col>
-                    <Col>
-                        <Container className="p-3">
-                            <h3>Raccourcis fonctionnalités</h3>
-                            <hr />
-
-                                <Container>
-                                    <CardGroup>
-                                        <Form onSubmit={handleClick}>
-                                            <Form.Group className='mb-3'>
-                                            <Card>
-                                                <Card.Body>
-                                                    <input type="text" name="name" placeholder="Nom" onChange={(e) => {handleSelect(e.target.value)}} />
-                                                </Card.Body>
-                                            </Card>
-                                            <Card>                                                
-                                                <Form.Label>Date de début</Form.Label>
-                                                <Card.Body>
-                                                    <input type="datetime-local" className='form-control' name="start" onChange={(e) => {handleSelect(e.target.value)}}/>
-                                                </Card.Body>
-                                            </Card>
-                                            <Card>
-                                                <Form.Label>Date de fin</Form.Label>
-                                                <Card.Body>
-                                                    <input type="datetime-local" className='form-control' name = "end" onChange={(e) => {handleSelect(e.target.value)}}/>
-                                                </Card.Body>
-                                            </Card>
-                                            
-                                            <Card>
-                                                <button type = "submit "className="btn btn-primary">Ajouter</button>
-                                            </Card>
-                                            </Form.Group>
-                                        </Form>
-                                    </CardGroup>
-                                </Container>
-                        </Container>
-                    </Col>
                 </Row>
             </Container>
         )
@@ -144,7 +108,7 @@ const PlanningView = () => {
     // }
 
 
-export default PlanningView
+export default PlanningViewStudent
 
 
 /**
