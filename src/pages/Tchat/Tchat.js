@@ -1,294 +1,42 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import TchatMessage from '../../components/Tchat/TchatMessage'
 import { BiArrowBack } from 'react-icons/bi'
 import { TbSend } from 'react-icons/tb'
 import { AiOutlineArrowDown } from 'react-icons/ai'
 import { FloatingLabel, Form } from 'react-bootstrap'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+import moment from 'moment'
 
-const Tchat = () => {
-	const tchatData = {
-		"chatId": 0,
-		"chatName": "Cours",
-		"chatComment": "string",
-		"messages": [
-			{
-				"messageId": 0,
-				"messageContent": "Message Test",
-				"postDateTime": "2022-06-14T12:02:46.290Z",
-				"person": {
-					"personId": 1,
-					"givenName": "Élève",
-					"surname": "string",
-					"mail": "string",
-					"password": "string",
-					"birthDate": "2022-06-14T12:02:46.290Z",
-					"isAdmin": true,
-					"isProfessor": true
-				},
-				"attachment": {
-					"attachmentId": 0,
-					"content": "string"
-				}
-			},
-			{
-				"messageId": 1,
-				"messageContent": "Autre Message Test",
-				"postDateTime": "2022-06-14T12:02:46.290Z",
-				"person": {
-					"personId": 0,
-					"givenName": "Élève",
-					"surname": "string",
-					"mail": "string",
-					"password": "string",
-					"birthDate": "2022-06-14T12:02:46.290Z",
-					"isAdmin": true,
-					"isProfessor": true
-				},
-				"attachment": {
-					"attachmentId": 0,
-					"content": "string"
-				}
-			},
-			{
-				"messageId": 2,
-				"messageContent": "Autre Message Test",
-				"postDateTime": "2022-06-14T12:02:46.290Z",
-				"person": {
-					"personId": 1,
-					"givenName": "Élève",
-					"surname": "string",
-					"mail": "string",
-					"password": "string",
-					"birthDate": "2022-06-14T12:02:46.290Z",
-					"isAdmin": true,
-					"isProfessor": true
-				},
-				"attachment": {
-					"attachmentId": 0,
-					"content": "string"
-				}
-			},
-			{
-				"messageId": 3,
-				"messageContent": "Autre Message Test",
-				"postDateTime": "2022-06-14T12:02:46.290Z",
-				"person": {
-					"personId": 1,
-					"givenName": "Élève",
-					"surname": "string",
-					"mail": "string",
-					"password": "string",
-					"birthDate": "2022-06-14T12:02:46.290Z",
-					"isAdmin": true,
-					"isProfessor": true
-				},
-				"attachment": {
-					"attachmentId": 0,
-					"content": "string"
-				}
-			},
-			{
-				"messageId": 4,
-				"messageContent": "Autre Message Test",
-				"postDateTime": "2022-06-14T12:02:46.290Z",
-				"person": {
-					"personId": 1,
-					"givenName": "Élève",
-					"surname": "string",
-					"mail": "string",
-					"password": "string",
-					"birthDate": "2022-06-14T12:02:46.290Z",
-					"isAdmin": true,
-					"isProfessor": true
-				},
-				"attachment": {
-					"attachmentId": 0,
-					"content": "string"
-				}
-			},
-			{
-				"messageId": 5,
-				"messageContent": "Autre Message Test",
-				"postDateTime": "2022-06-14T12:02:46.290Z",
-				"person": {
-					"personId": 0,
-					"givenName": "Élève",
-					"surname": "string",
-					"mail": "string",
-					"password": "string",
-					"birthDate": "2022-06-14T12:02:46.290Z",
-					"isAdmin": true,
-					"isProfessor": true
-				},
-				"attachment": {
-					"attachmentId": 0,
-					"content": "string"
-				}
-			},
-			{
-				"messageId": 6,
-				"messageContent": "Autre Message Test",
-				"postDateTime": "2022-06-14T12:02:46.290Z",
-				"person": {
-					"personId": 1,
-					"givenName": "Élève",
-					"surname": "string",
-					"mail": "string",
-					"password": "string",
-					"birthDate": "2022-06-14T12:02:46.290Z",
-					"isAdmin": true,
-					"isProfessor": true
-				},
-				"attachment": {
-					"attachmentId": 0,
-					"content": "string"
-				}
-			},
-			{
-				"messageId": 7,
-				"messageContent": "Autre Message Test",
-				"postDateTime": "2022-06-14T12:02:46.290Z",
-				"person": {
-					"personId": 1,
-					"givenName": "Élève",
-					"surname": "string",
-					"mail": "string",
-					"password": "string",
-					"birthDate": "2022-06-14T12:02:46.290Z",
-					"isAdmin": true,
-					"isProfessor": true
-				},
-				"attachment": {
-					"attachmentId": 0,
-					"content": "string"
-				}
-			},
-			{
-				"messageId": 8,
-				"messageContent": "Autre Message Test",
-				"postDateTime": "2022-06-14T12:02:46.290Z",
-				"person": {
-					"personId": 0,
-					"givenName": "Élève",
-					"surname": "string",
-					"mail": "string",
-					"password": "string",
-					"birthDate": "2022-06-14T12:02:46.290Z",
-					"isAdmin": true,
-					"isProfessor": true
-				},
-				"attachment": {
-					"attachmentId": 0,
-					"content": "string"
-				}
-			},
-			{
-				"messageId": 9,
-				"messageContent": "Autre Message Test",
-				"postDateTime": "2022-06-14T12:02:46.290Z",
-				"person": {
-					"personId": 1,
-					"givenName": "Élève",
-					"surname": "string",
-					"mail": "string",
-					"password": "string",
-					"birthDate": "2022-06-14T12:02:46.290Z",
-					"isAdmin": true,
-					"isProfessor": true
-				},
-				"attachment": {
-					"attachmentId": 0,
-					"content": "string"
-				}
-			},
-			{
-				"messageId": 10,
-				"messageContent": "Autre Message Test",
-				"postDateTime": "2022-06-14T12:02:46.290Z",
-				"person": {
-					"personId": 0,
-					"givenName": "Élève",
-					"surname": "string",
-					"mail": "string",
-					"password": "string",
-					"birthDate": "2022-06-14T12:02:46.290Z",
-					"isAdmin": true,
-					"isProfessor": true
-				},
-				"attachment": {
-					"attachmentId": 0,
-					"content": "string"
-				}
-			},
-			{
-				"messageId": 11,
-				"messageContent": "Autre Message Test",
-				"postDateTime": "2022-06-14T12:02:46.290Z",
-				"person": {
-					"personId": 0,
-					"givenName": "Élève",
-					"surname": "string",
-					"mail": "string",
-					"password": "string",
-					"birthDate": "2022-06-14T12:02:46.290Z",
-					"isAdmin": true,
-					"isProfessor": true
-				},
-				"attachment": {
-					"attachmentId": 0,
-					"content": "string"
-				}
-			},
-			{
-				"messageId": 12,
-				"messageContent": "Autre Message Test",
-				"postDateTime": "2022-06-14T12:02:46.290Z",
-				"person": {
-					"personId": 1,
-					"givenName": "Élève",
-					"surname": "string",
-					"mail": "string",
-					"password": "string",
-					"birthDate": "2022-06-14T12:02:46.290Z",
-					"isAdmin": true,
-					"isProfessor": true
-				},
-				"attachment": {
-					"attachmentId": 0,
-					"content": "string"
-				}
-			},
-		],
-		"students": [
-			{
-				"personId": 0,
-				"givenName": "string",
-				"surname": "string",
-				"mail": "string",
-				"password": "string",
-				"birthDate": "2022-06-14T12:02:46.290Z",
-				"isAdmin": true,
-				"isProfessor": true
-			}
-		],
-		"teacher": {
-			"personId": 0,
-			"givenName": "Professeur",
-			"surname": "string",
-			"mail": "string",
-			"password": "string",
-			"birthDate": "2022-06-14T12:02:46.290Z",
-			"isAdmin": true,
-			"isProfessor": true
-		},
-		"startDateTime": "2022-06-14T12:02:46.290Z",
-		"endDateTime": "2022-06-14T12:02:46.290Z"
-	}
+const Tchat = (props) => {
+	let { id } = useParams();
+
+	let [tchatData, setTchatData] = useState({});
+
+	useEffect(() => {
+		// setInterval(() => {
+			axios.get(`http://172.19.2.11:5000/api/Message/GetChatMessages/${id}`).then(res => {
+				setTchatData(res.data);
+			});
+		// }, 3000);
+		scrollDown();
+    }, []);
 
 	let scrollDown = () => {
 		let tchat = document.querySelector('.tchat');
 		tchat.scrollTop = tchat.scrollHeight;
+	}
+
+	let sendMessage = () => {
+		let message = document.querySelector('textarea#message').value;
+		axios.post("http://172.19.2.11:5000/api/Message/CreateMessage", {
+			textMessage: message,
+			fromPersonId: 1,
+			sentDate: moment().toISOString(),
+		}).then(res => {
+			console.log(res);
+		});
 	}
 
   return (
@@ -303,15 +51,15 @@ const Tchat = () => {
                     </div>
 					<div className='d-grid col-4' />
                     <div className='d-grid col-4'>
-						<h3>{tchatData.chatName} - {tchatData.teacher.givenName}</h3>
+						<h3>{tchatData.name}{/* - {tchatData.teacher.givenName*/}</h3>
                     </div>
                 </div>
 				<div className='card'>
 					<div className='card-body'>
 						<div className='tchat' style={{overflow: "hidden auto", maxHeight:'60vh'}}>
-							{tchatData.messages.map((message) => {
-								message.person.isAuthor = message.person.personId === 0 // Replace with login user
-								return <TchatMessage key={message.messageId} message={message} />
+							{tchatData.messages !== undefined && tchatData.messages.map((message) => {
+								message.isAuthor = message.from.id === 0 // Replace with login user
+								return <TchatMessage key={message.id} message={message} />
 							})}
 						</div>
 						<div className='row d-flex align-items-center'>
@@ -319,10 +67,10 @@ const Tchat = () => {
 								<FloatingLabel
 									label='Message'
 								>
-									<Form.Control as="textarea" placeholder="comments" style={{maxHeight:"400px"}}></Form.Control>
+									<Form.Control id="message" as="textarea" placeholder="comments" style={{maxHeight:"400px"}}></Form.Control>
 								</FloatingLabel>
 							</div>
-							<button className='btn btn-primary mt-4 col-2' style={{maxHeight:"45px"}}>Envoyer <TbSend /></button>
+							<button className='btn btn-primary mt-4 col-2' style={{maxHeight:"45px"}} onClick={sendMessage}>Envoyer <TbSend /></button>
 							<div className='col-1 d-flex align-items-center'>
 								<button className='btn btn-primary mt-4' style={{maxHeight:"45px", maxWidth:"45px"}} onClick={scrollDown}><AiOutlineArrowDown /></button>
 							</div>
