@@ -7,10 +7,10 @@ export const AppNavbar = () => {
 
 
     return (
-        <Navbar className="estiam-navbar" variant="dark">
+        <Navbar className="estiam-navbar" variant="white">
             <Container fluid>
                 <Navbar.Brand>
-                    <Link to="/">
+                    <Link to="home">
                         <Image src={logo} width={150} />
                     </Link>
                 </Navbar.Brand>
@@ -22,9 +22,15 @@ export const AppNavbar = () => {
                         <Nav.Item>
                             <Link to="gestion-des-notes">Notes</Link>
                         </Nav.Item>
+                        <Nav.Item>
+                            <Link to="tchat">Messagerie</Link>
+                        </Nav.Item>
                     </Nav>
                 </Navbar.Collapse>
                 <Nav>
+                    <Nav.Item>
+                        <Link to="/admin">Administration</Link>
+                    </Nav.Item>
                     <Nav.Item>
                         <Link to="/settings">Parametres</Link>
                     </Nav.Item>
@@ -35,6 +41,7 @@ export const AppNavbar = () => {
                         <Link to="/login">Se connecter</Link>
                     </Nav.Item>
                 </Nav>
+                
             </Container>
         </Navbar >
     )

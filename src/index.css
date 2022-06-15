@@ -27,6 +27,12 @@ code {
   color : white;
   font-weight: bold;
   text-decoration: none;
+  padding: 0.5vw;
+  transition-duration: 0.2s;
+}
+
+.estiam-navbar a:hover { 
+  color : #9955ee;
 }
 
 .estiam-btn { 
@@ -34,8 +40,26 @@ code {
   font-weight: bold;
   background-color: white;
   border : 2px solid #6633cc;
+  margin-top: 5px;
+  margin-right: 5px;
 }
 .estiam-btn :hover, .estiam-btn :focus{ 
+  color : white;
+  font-weight: bold;
+  background-color: #6633cc;
+  border : 2px solid #6633cc;
+}
+
+.estiam-btn-center { 
+  color : black;
+  font-weight: bold;
+  background-color: white;
+  border : 2px solid #6633cc;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+.estiam-btn-center :hover, .estiam-btn :focus{ 
   color : white;
   font-weight: bold;
   background-color: #6633cc;
@@ -59,4 +83,20 @@ code {
   width: 100%;
   height: auto;
   opacity: 0.6;
+
+}
+.obligatoire {
+  color: red;
+}
+.txtarea {
+  height: 150px;
+  width: 100%;
+}
+#contact-form {
+  margin: 22vw;
+  width: 100%;
+}
+#admin-form {
+  margin: auto auto;
+  width: 100%;
 }
