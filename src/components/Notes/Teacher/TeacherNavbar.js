@@ -7,7 +7,7 @@ export const TeacherNavbar = () => {
 
 
     return (
-        <Navbar className="estiam-navbar" variant={"dark"}>
+        <Navbar className="estiam-navbar" variant={"white"}>
             <Container fluid>
                 <Nav>
                     <Nav.Item>
