@@ -22,6 +22,9 @@ export const AppNavbar = () => {
                         <Nav.Item>
                             <Link to="gestion-des-notes">Notes</Link>
                         </Nav.Item>
+                        <Nav.Item>
+                            <Link to="tchat">Messagerie</Link>
+                        </Nav.Item>
                     </Nav>
                 </Navbar.Collapse>
                 <Nav>
@@ -35,6 +38,7 @@ export const AppNavbar = () => {
                         <Link to="/login">Se connecter</Link>
                     </Nav.Item>
                 </Nav>
+                
             </Container>
         </Navbar >
     )

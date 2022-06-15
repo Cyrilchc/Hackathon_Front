@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet, useRoutes } from 'react-router-dom';
-
+import Listes from './pages/Listes';
 /**
  * Layouts
  */
@@ -16,6 +16,7 @@ import TeacherLayout from './layouts/Notes/Teacher/TeacherLayout';
 import NotesTeacherDashboardView from './pages/Notes/Teacher/Dashboard';
 import NotesTeacherCreateView from './pages/Notes/Teacher/Create';
 import PageNotFoundView from './pages/PageNotFound';
+import TchatAccueil from './components/Tchat/TchatAccueil';
 import { Navigate } from 'react-router-dom';
 
 
@@ -39,9 +40,16 @@ const App = () => {
         { path: '', element: <LoginView /> },
         { path: 'planning', element: <PlanningView /> },
         { path: 'login', element: <LoginView /> },
-        //{ path: 'contact', elemnt: <ContactView /> },
-        {
-          path: 'gestion-des-notes', element: <TeacherLayout />, children: [
+        { path: 'accueil', element: <ContactView /> },
+        { path: 'tchat', children: [
+          { path: '', element: <Navigate to="accueil" />},
+          { path: 'accueil', element: <TchatAccueil type="ded"/>},
+          { path: 'liste', children: [
+            { path: 'old', element: <Listes affichage="Anciens"/> },
+            { path: 'new', element: <Listes affichage="Nouveaux"/> },
+          ]},
+        ]},
+        { path: 'gestion-des-notes', element: <TeacherLayout />, children: [
             { path: '', element: <Navigate to="creation" /> },
             { path: 'creation', element: <NotesTeacherCreateView /> }, 
             { path: 'visualisation', element : <NotesTeacherDashboardView/>}
