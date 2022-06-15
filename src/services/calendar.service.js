@@ -21,7 +21,7 @@ export class CalendarService {
          */
         const config = { 
             params : { 
-                appointments : _appointements,
+                appointements : _appointements,
             }
         }
         
