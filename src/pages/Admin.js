@@ -8,15 +8,13 @@ const AdminView = () => {
 
     return ( 
         <Container>
-            <h3>Administration</h3>
-            <hr />
+            
             <Row>
-                <Col>Bienvenue sur la page d'administration</Col> 
-                <Col></Col>
+               
 
                 <Container id="admin-form" className="p-3 shadow-lg estiam-block mt-3">
                     <Col></Col>
-                    <h2>Création / Modification</h2>
+                    <h2><center> Création / Modification </center></h2>
                     <Form>
                         <Form.Group className="mb-3">
                             <Form.Label>Nom<span class="obligatoire">*</span></Form.Label>
