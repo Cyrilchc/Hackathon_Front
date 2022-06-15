@@ -3,7 +3,7 @@ import axios from 'axios'
 /**
  * Bootstrap components
  */
-import {Card, CardGroup, Col, Container, Row} from 'react-bootstrap'
+import {Card, CardGroup, Col, Container, Form, Row} from 'react-bootstrap'
 /**
  * Fullcalendar components and librairies
  */
@@ -33,10 +33,17 @@ const PlanningView = () => {
     const navigate = useNavigate()
 
     const [data, setData] = React.useState([])
-
+    const [start, setStart] = React.useState()
+    const [end, setEnd] = React.useState()
+    const [name, setName] = React.useState()
  
     const fetchData = async () => await CalendarService.index().then(res => setData(res));
 
+    const handleSelect = (_value) => {
+        setStart(_value.start)
+        setEnd(_value.end)
+        setName(_value.title)
+    }
 
     React.useEffect(() => {
         axios.get(`http://172.19.2.11:5000/api/Appointment/GetGroupAppointment/1`).then((res) => {
@@ -47,6 +54,23 @@ const PlanningView = () => {
     }, []);
 
 
+    const handleClick = (event) => {
+        event.preventDefault();
+        console.log(event.target.end.value);
+        axios.post(`http://172.19.2.11:5000/api/Appointment/CreateAppointment`, {
+            name: event.target.name.value,
+            startDateTime: event.target.start.value ,
+            endDateTime: event.target.end.value ,
+            groupID: 1,
+            //userId: userConnected.id,
+        }).then((res) => {
+            console.log(res);
+            if (res.request.status === 204) {
+                alert("Horaire ajoutée avec succès");
+                window.location.reload();
+            }
+        });
+    }
 
     // if(userConnected) {
         return (
@@ -81,23 +105,32 @@ const PlanningView = () => {
                             <hr />
                             <Container>
                                 <CardGroup>
-                                    <Card>
-                                        <Card.Body>
-                                            Push
-                                        </Card.Body>
-                                    </Card>
-                                    <Card>
-                                        <Card.Body>
-                                            Push
-                                        </Card.Body>
-                                    </Card>
-                                    <Card>
-                                        <Card.Body>
-                                            Push
-                                        </Card.Body>
-                                    </Card>
+                                    <Form onSubmit={handleClick}>
+                                        <Form.Group className='mb-3'>
+                                        <Card>
+                                            <Card.Body>
+                                                <input type="text" name="name" placeholder="Nom" onChange={(e) => {handleSelect(e.target.value)}} />
+                                            </Card.Body>
+                                        </Card>
+                                        <Card>                                                
+                                            <Form.Label>Date de début</Form.Label>
+                                            <Card.Body>
+                                                <input type="datetime-local" className='form-control' name="start" onChange={(e) => {handleSelect(e.target.value)}}/>
+                                            </Card.Body>
+                                        </Card>
+                                        <Card>
+                                            <Form.Label>Date de fin</Form.Label>
+                                            <Card.Body>
+                                                <input type="datetime-local" className='form-control' name = "end" onChange={(e) => {handleSelect(e.target.value)}}/>
+                                            </Card.Body>
+                                        </Card>
+                                        
+                                        <Card>
+                                            <button type = "submit "className="btn btn-primary">Ajouter</button>
+                                        </Card>
+                                        </Form.Group>
+                                    </Form>
                                 </CardGroup>
-
                             </Container>
                         </Container>
                     </Col>
