@@ -20,26 +20,25 @@ const StudentTeacherView = () => {
     const postNote = async (e) => {
         e.preventDefault();
         axios
-            .post("http://192.168.43.181:5000/api/Grade", {
-                StudentPersonId: 1,
-                AssignmentId: subjectSelect,
-                assignmentName: e.target.elements.assignmentName.value,
-                assignmentGrade: e.target.elements.assignmentGrade.value,
+            .post("http://172.19.2.11:5000/api/Grade/CreateGrade/", {
+                score: e.target.score.value,
+                studentId: id,
+                subjectId: subjectSelect,
             })
             .then((res) => {
                 console.log(res);
 
-                if (res.request.status === 201) {
+                if (res.request.status === 200) {
                     alert("Note ajoutée avec succès");
+                    window.location.reload();
                 }
             });
     };
 
     React.useEffect(() => {
-        axios.get(`http://192.168.43.181:5000/api/Subject`).then((res) => {
+        axios.get(`http://172.19.2.11:5000/api/Subject/GetSubjects/`).then((res) => {
             setData(res.data);
         });
-        // fetchSubjects();
     }, []);
 
     return (
@@ -51,21 +50,21 @@ const StudentTeacherView = () => {
                     <Form.Group className="mb-3">
                         <Form.Label>Matière</Form.Label>
                         <Form.Select
-                            name="assignmentName"
+                            name="subjectId"
                             onChange={(event) => {
                                 handleSelect(event.target.value);
                             }}
                         >
                             {data.map((subject) => (
-                                <option key={subject.subjectId} id={subject.subjectId} value={subject.subjectName}>
-                                    {subject.subjectName}
+                                <option key={subject.id} id={subject.id} value={subject.id}>
+                                    {subject.name}
                                 </option>
                             ))}
                         </Form.Select>
                     </Form.Group>
                     <Form.Group className="mb-3">
-                        <Form.Label htmlFor="assignmentGrade">Note</Form.Label>
-                        <Form.Control type="number" name="assignmentGrade" id="assignmentGrade" min="0" max="20" />
+                        <Form.Label htmlFor="score">Note</Form.Label>
+                        <Form.Control type="number" name="score" id="score" min="0" max="20" required />
                     </Form.Group>
                     <Button type="submit" className="estiam-btn">
                         Envoyer
