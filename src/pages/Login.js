@@ -79,10 +79,6 @@ const LoginView = () => {
                    */}
                   <Form.Label>Mot de passe</Form.Label>
                   <Form.Control type="password" placeholder="Mot de passe" onChange={(_event) => handlePasswordInput(_event.target.value)} />
-<<<<<<< HEAD
-                  
-=======
->>>>>>> 41d75a7668023b550364eb8930b97b12ba5218c0
                   <Button className="estiam-btn">Mot de passe oublié ?</Button>
                 </Form.Group>
               </Form>

@@ -11,10 +11,9 @@ const AdminView = () => {
             <h3>Administration</h3>
             <hr />
             <Row>
-<<<<<<< HEAD
                 <Col>Bienvenue sur la page d'administration</Col> 
                 <Col></Col>
-=======
+
                 <Container id="admin-form" className="p-3 shadow-lg estiam-block mt-3">
                     <Col></Col>
                     <h2>Création / Modification</h2>
@@ -43,7 +42,6 @@ const AdminView = () => {
                     <Button className='estiam-btn'>ANNULER</Button>
                     <Button className='estiam-btn'>ENREGISTRER</Button>
                 </Container>
->>>>>>> 73c0d17 (modif)
             </Row>
         </Container>
     )
