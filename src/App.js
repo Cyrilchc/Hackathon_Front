@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet, useRoutes } from 'react-router-dom';
-
+import Listes from './pages/Listes';
 /**
  * Layouts
  */
@@ -22,6 +22,7 @@ import TchatCreate from './pages/Tchat/Create';
 import TchatUpdate from './pages/Tchat/Update';
 import Tchat from './pages/Tchat/Tchat';
 import PageNotFoundView from './pages/PageNotFound';
+import TchatAccueil from './components/Tchat/TchatAccueil';
 import SettingsView from './pages/Settings'; 
 import HomeView from './pages/Home';
 import AdminView from './pages/Admin'
@@ -51,6 +52,11 @@ const App = () => {
         { path: 'planning', element: <PlanningView /> },
         { path: 'login', element: <LoginView /> },
         { path: 'tchat', children: [
+          { path: '', element: <TchatAccueil type="ded"/>},
+          { path: 'liste', children: [
+            { path: 'old', element: <Listes affichage="Anciens"/> },
+            { path: 'new', element: <Listes affichage="Nouveaux"/> },
+          ]},
           { path: '*', element: <Tchat />},
           { path: 'create', element: <TchatCreate />},
           { path: 'update', children: [

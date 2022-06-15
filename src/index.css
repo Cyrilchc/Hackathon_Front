@@ -41,6 +41,7 @@ code {
   background-color: white;
   border : 2px solid #6633cc;
   margin-top: 5px;
+  margin-right: 5px;
 }
 .estiam-btn :hover, .estiam-btn :focus{ 
   color : white;

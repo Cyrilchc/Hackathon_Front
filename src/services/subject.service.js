@@ -1,9 +1,20 @@
-import API from '../config/axios'
+import API from "../config/axios";
 
-export class SubjectService { 
+const URL = "Subject";
 
-  static index()
-  {
-    
-  }
+export class SubjectService {
+    /**
+     * index function
+     * @returns
+     */
+    static index() {
+        const config = {
+            params: {},
+        };
+
+        return API()
+            .get(`${URL}`, config)
+            .then((response) => response.data)
+            .catch((error) => error.message);
+    }
 }
