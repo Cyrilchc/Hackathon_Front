@@ -87,7 +87,7 @@ const LoginView = () => {
                * Composant Button de React Bootstrap
                * onClick (lorsque l'on clique sur le bouton) => appel de la fonction handleSubmitClick
                */}
-              <Button className="estiam-btn-login" onClick={() => handleSubmitClick()}>
+              <Button className="estiam-btn-center" onClick={() => handleSubmitClick()}>
                 Se connecter
               </Button>
             </Container>

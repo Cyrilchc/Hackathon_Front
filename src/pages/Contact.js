@@ -29,7 +29,7 @@ const ContactView = () => {
                                     </div>
                                 </Form.Group>
                             </Form>
-                            <Button className="estiam-btn">SUBMIT</Button>
+                            <Button className="estiam-btn-center">SUBMIT</Button>
                         </Container>
                     </Container>
                 </Col>
