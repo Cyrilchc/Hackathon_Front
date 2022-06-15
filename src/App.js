@@ -60,7 +60,7 @@ const App = () => {
           ]},
           { path: 'create', element: <TchatCreate />},
           { path: 'update', children: [
-            { path: '*', element: <TchatUpdate />},
+            { path: ':id', element: <TchatUpdate />},
           ]},
         ]},
         { path: 'contact', element: <ContactView /> },

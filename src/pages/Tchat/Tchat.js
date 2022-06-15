@@ -13,14 +13,20 @@ const Tchat = (props) => {
 	let { id } = useParams();
 
 	let [tchatData, setTchatData] = useState({});
+	let [students, setStudents] = React.useState([]);
+	let [selectedParticipants, setSelectedParticipants] = React.useState(null);
 
 	useEffect(() => {
+		axios.get('http://172.19.2.11:5000/api/Student/GetStudents').then(res => {
+			setStudents(res.data.map(student => { return { value: student.id, label: `${student.lastname} ${student.surname}`}; }));
+		});
+		scrollDown();
+
 		// setInterval(() => {
 			axios.get(`http://172.19.2.11:5000/api/Message/GetChatMessages/${id}`).then(res => {
 				setTchatData(res.data);
 			});
 		// }, 3000);
-		scrollDown();
     }, []);
 
 	let scrollDown = () => {
@@ -30,11 +36,13 @@ const Tchat = (props) => {
 
 	let sendMessage = () => {
 		let message = document.querySelector('textarea#message').value;
-		axios.post("http://172.19.2.11:5000/api/Message/CreateMessage", {
+		let toSend =  {
 			textMessage: message,
 			fromPersonId: 1,
 			sentDate: moment().toISOString(),
-		}).then(res => {
+			chatId: id,
+		}
+		axios.post("http://172.19.2.11:5000/api/Message/CreateMessage", toSend).then(res => {
 			console.log(res);
 		});
 	}
@@ -57,7 +65,7 @@ const Tchat = (props) => {
 				<div className='card'>
 					<div className='card-body'>
 						<div className='tchat' style={{overflow: "hidden auto", maxHeight:'60vh'}}>
-							{tchatData.messages !== undefined && tchatData.messages.map((message) => {
+							{tchatData.messages?.map((message) => {
 								message.isAuthor = message.from.id === 0 // Replace with login user
 								return <TchatMessage key={message.id} message={message} />
 							})}
