@@ -9,14 +9,22 @@ import MainLayout from './layouts/MainLayout';
 /**
  * Views
  */
+
+//theo//
 import PlanningView from './pages/Planning';
 import ContactView from './pages/Contact';
 import LoginView from './pages/Login';
 import TeacherLayout from './layouts/Notes/Teacher/TeacherLayout';
 import NotesTeacherDashboardView from './pages/Notes/Teacher/Dashboard';
 import NotesTeacherCreateView from './pages/Notes/Teacher/Create';
+import TchatCreate from './pages/Tchat/Create';
+import TchatUpdate from './pages/Tchat/Update';
+import Tchat from './pages/Tchat/Tchat';
 import PageNotFoundView from './pages/PageNotFound';
 import TchatAccueil from './components/Tchat/TchatAccueil';
+import SettingsView from './pages/Settings'; 
+import HomeView from './pages/Home';
+import AdminView from './pages/Admin'
 import { Navigate } from 'react-router-dom';
 
 
@@ -24,6 +32,8 @@ import { Navigate } from 'react-router-dom';
  * App component
  * @returns 
  */
+
+//test
 const App = () => {
   /**
    * routes 
@@ -40,16 +50,24 @@ const App = () => {
         { path: '', element: <LoginView /> },
         { path: 'planning', element: <PlanningView /> },
         { path: 'login', element: <LoginView /> },
-        { path: 'accueil', element: <ContactView /> },
         { path: 'tchat', children: [
-          { path: '', element: <Navigate to="accueil" />},
-          { path: 'accueil', element: <TchatAccueil type="ded"/>},
+          { path: '', element: <TchatAccueil type="ded"/>},
           { path: 'liste', children: [
             { path: 'old', element: <Listes affichage="Anciens"/> },
             { path: 'new', element: <Listes affichage="Nouveaux"/> },
           ]},
+          { path: '*', element: <Tchat />},
+          { path: 'create', element: <TchatCreate />},
+          { path: 'update', children: [
+            { path: '*', element: <TchatUpdate />},
+          ]},
         ]},
-        { path: 'gestion-des-notes', element: <TeacherLayout />, children: [
+        { path: 'contact', element: <ContactView /> },
+        { path: 'settings', element: <SettingsView /> },
+        { path: 'home', element: <HomeView /> }, 
+        { path: 'admin', element: <AdminView /> },
+        {
+          path: 'gestion-des-notes', element: <TeacherLayout />, children: [
             { path: '', element: <Navigate to="creation" /> },
             { path: 'creation', element: <NotesTeacherCreateView /> }, 
             { path: 'visualisation', element : <NotesTeacherDashboardView/>}
