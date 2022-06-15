@@ -29,6 +29,9 @@ export const AppNavbar = () => {
                 </Navbar.Collapse>
                 <Nav>
                     <Nav.Item>
+                        <Link to="/recherche">Recherche</Link>
+                    </Nav.Item>
+                    <Nav.Item>
                         <Link to="/admin">Administration</Link>
                     </Nav.Item>
                     <Nav.Item>
