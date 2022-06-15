@@ -4,32 +4,36 @@
 import API from '../config/axios'
 
 
-const URL = "calendar"
+const URL = "/calendar"
 /**
  * Class CalendarService
  */
 export class CalendarService { 
 
     /**
-     * index function
-     * Cette fonction sert a faire appel a l'URL de l'API /index
+     *  index function
+     * @param {*} _appointements
+     * @returns 
      */
-    static index() {
+    static index(_appointements) {
         /**
          * config
          */
         const config = { 
             params : { 
-
+                appointements : _appointements,
             }
         }
+        
         return API()
         .get(`${URL}`,  config)
         .then((response) => response.data)
+        .catch(error => error.message)
     }
 
     static store() {
-
+        return API()
+        .post(`${URL}/store`)
     }
 
     static destroy() {

@@ -1,16 +1,15 @@
 import React from 'react'
-
+import axios from 'axios'
 /**
  * Bootstrap components
  */
 import {Card, CardGroup, Col, Container, Row} from 'react-bootstrap'
-
 /**
  * Fullcalendar components and librairies
  */
 import FullCalendar from '@fullcalendar/react'
-import dayGridPlugin from '@fullcalendar/daygrid'
-
+import timeGridPlugin from '@fullcalendar/timegrid'
+import frLocale from '@fullcalendar/core/locales/fr';
 import { Navigate, useNavigate } from 'react-router-dom'
 
 
@@ -19,6 +18,7 @@ import { Navigate, useNavigate } from 'react-router-dom'
  */ 
 import { AuthService } from '../services/auth.service.js'
 import { CalendarService } from '../services/calendar.service.js'
+import { event } from 'jquery'
 
 
 /**
@@ -31,113 +31,83 @@ const PlanningView = () => {
 
     const userConnected = AuthService.handleConnection()
     const navigate = useNavigate()
-    /**
-     * Hooks d'etat
-     */
+
     const [data, setData] = React.useState([])
 
-
-
-    const events =  [
-        {
-          title: 'BCH237',
-          start: '2022-05-18T10:30:00',
-          end: '2022-05-18T11:30:00',
-          extendedProps: {
-            department: 'BioChemistry'
-          },
-          description: 'Lecture'
-        }
-        // more events ...
-      ]
-    /**
-     * FONCTIONS
-     * - fetchData est une fonction asynchrone qui permet via le service <Nom_du_service> dans le dossier service d'appeler une fonction qui requete le serveur et recupere les donnees
-     * - 
-     */
+ 
     const fetchData = async () => await CalendarService.index().then(res => setData(res));
 
-    // HOOK D'EFFET
-    /* 
-        Le hook d'effet permet l'execution d'effets de bord dans les fonctions composants
-    */
+
     React.useEffect(() => {
-        /**
-         * Si userConnected est vide et la variable navigate existe
-         */
-        if(!userConnected && navigate) {
-            navigate('/login')
-        }
-        else {
-            fetchData()
-        }
-    }, [userConnected, navigate])
+        axios.get(`http://172.19.2.11:5000/api/Appointment/GetGroupAppointment/1`).then((res) => {
+            console.log(res.data);
+            setData(res.data);
+        });
+        // fetchData();
+    }, []);
 
 
-    /**
-     * RENDERING
-     * C'est la partie qui renvoie du HTML lorsque le composant est cree
-     * condition : si userConnected n'est pas vide
-     */
-    if(userConnected)
-    return (
-        <Container fluid>
-            <Row>
-                <Col>
-                    {
-                        /**
-                         * Composant FullCalendar de la librairie FullCalendar
-                         * 
-                         * 
-                         */
 
-                    }
-                    <Container className="p-3">
-                        <FullCalendar
-                            plugins={[dayGridPlugin]}
-                            initialView="dayGridMonth"
-                            weekends={false}        
-                            events={events}
-                        />
-                    </Container>
-                </Col>
-                <Col>
-                    <Container className="p-3">
-                        <h3>Raccourcis fonctionnalités</h3>
-                        <hr />
-                        <Container>
-                            <CardGroup>
-                                <Card>
-                                    <Card.Body>
-                                        Push
-                                    </Card.Body>
-                                </Card>
-                                <Card>
-                                    <Card.Body>
-                                        Push
-                                    </Card.Body>
-                                </Card>
-                                <Card>
-                                    <Card.Body>
-                                        Push
-                                    </Card.Body>
-                                </Card>
-                            </CardGroup>
-
+    // if(userConnected) {
+        return (
+            
+            <Container fluid>
+                <Row>
+                    <Col>
+                        <Container className="p-3">
+                            <FullCalendar
+                                plugins={[timeGridPlugin]}
+                                initialView="timeGridWeek"
+                                weekends={true}        
+                                timeZone= "local"
+                                slotMinTime= "08:00"
+                                slotMaxTime= "17:00"
+                                locale = "fr"
+                                events={data.map((appointements) => (
+                                    {
+                                        title: appointements.name,
+                                        start: appointements.startDateTime,
+                                        end: appointements.endDateTime,
+                                    }
+                                ))}
+                              
+                                
+                            />
                         </Container>
-                    </Container>
-                </Col>
-            </Row>
-        </Container>
-    )
-    else return null
-}
+                    </Col>
+                    <Col>
+                        <Container className="p-3">
+                            <h3>Raccourcis fonctionnalités</h3>
+                            <hr />
+                            <Container>
+                                <CardGroup>
+                                    <Card>
+                                        <Card.Body>
+                                            Push
+                                        </Card.Body>
+                                    </Card>
+                                    <Card>
+                                        <Card.Body>
+                                            Push
+                                        </Card.Body>
+                                    </Card>
+                                    <Card>
+                                        <Card.Body>
+                                            Push
+                                        </Card.Body>
+                                    </Card>
+                                </CardGroup>
+
+                            </Container>
+                        </Container>
+                    </Col>
+                </Row>
+            </Container>
+        )
+        }
+    // }
 
 
-/**
- * export default
- * C'est ce qui nous permet d'appeler PlanningView dans d'autres fichiers
- */
 export default PlanningView
 
 
