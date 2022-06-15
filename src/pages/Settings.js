@@ -73,7 +73,7 @@ const SettingsView = () => {
                   <Form.Label as={Col}>Theme</Form.Label>
                   <Col>
                     <Form.Select>
-                      <option>Clair</option>
+                     
                       <option>Sombre</option>
                     </Form.Select>
                   </Col>
