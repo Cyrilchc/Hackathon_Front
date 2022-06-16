@@ -7,35 +7,16 @@ const NotesTeacherDashboardView = () => {
     const [data, setData] = React.useState();
     const [group, setGroup] = React.useState();
     const [student, setStudent] = React.useState();
+    const [moyGenerale, setMoyenneGenerale] = React.useState();
+
     const [schoolClass, setSchoolClass] = React.useState(null);
 
-    let moyNotes = [];
-
-    // const fetchData = async () => {
-    //     for (let i = 0; i <= 15; i++) {
-    //         setData((data) => [
-    //             ...data,
-    //             {
-    //                 averageGrade: faker.datatype.number({ min: 0, max: 20 }),
-    //                 french: faker.datatype.number({ min: 0, max: 20 }),
-    //             },
-    //         ]);
-    //     }
-    // };
-
     const handleRowClick = (_student) => {
-        console.warn(_student);
         setStudent(_student);
     };
 
-    // const handleSelect = (_value) => {
-    //     setSchoolClass(_value);
-    // };
-
     const calculateAverage = (notesArray) => {
-        // console.log(notesArray);
         let sum = 0;
-
         notesArray.forEach((note) => {
             sum += note.score;
         });
@@ -43,36 +24,45 @@ const NotesTeacherDashboardView = () => {
     };
 
     const fetchGroupData = (groupId) => {
-        axios.get(`http://172.19.2.11:5000/api/Group/GetGroup/${groupId}/`).then((res) => {
-            setData(res.data);
-        });
+        let moyNotes = [];
+        setMoyenneGenerale()
 
-        data.students.forEach((student) => {
-            student.grades.forEach((grade) => {
-                moyNotes.push(grade);
+        axios.get(`http://172.19.2.11:5000/api/Group/GetGroup/${groupId}`).then((res) => {
+            setData(res.data);
+
+            res.data.students.forEach((student) => {
+                student.grades.forEach((grade) => {
+                    moyNotes.push(grade);
+                });
             });
+
+            if (moyNotes.length > 0) {
+                setMoyenneGenerale(calculateAverage(moyNotes).toFixed(2))
+            }
         });
     };
+
+
 
     React.useEffect(() => {
         axios.get(`http://172.19.2.11:5000/api/Group/GetGroups`).then((res) => {
             setGroup(res.data);
-        });
-        // fetchGroupData(group[0].id);
-    }, [moyNotes]);
+            fetchGroupData(res.data[0].id);
+        })
+    }, []);
 
     return (
         <Container fluid>
             <Row>
                 <Container className="p-3">
                     <Form.Group>
-                        <Form.Label>Choix de la classe</Form.Label>
+                        <Form.Label><b>Choix de la classe</b></Form.Label>
                         <Form.Select
                             onChange={(e) => {
                                 fetchGroupData(e.target.value);
                             }}
                         >
-                            {group.map((group) => (
+                            {group?.map((group) => (
                                 <option key={group.id} id={group.id} value={group.id}>
                                     {group.name}
                                 </option>
@@ -99,48 +89,44 @@ const NotesTeacherDashboardView = () => {
                                             <td>{student.grades.length > 0 ? `${calculateAverage(student.grades).toFixed(2)}/20` : "Aucune note"}</td>
                                         </tr>
                                     ))}
-                                <td colSpan="2">
-                                    <b>Moyenne générale de la classe :</b>
-                                </td>
-                                <td>
-                                    <b>{moyNotes.length > 0 ? `${calculateAverage(moyNotes).toFixed(2)}/20` : "Aucune note"}</b>
-                                </td>
+                                <tr>
+                                    <td colSpan="2">
+                                        <b>Moyenne générale de la classe :</b>
+                                    </td>
+                                    <td>
+                                        <b>{moyGenerale ? `${moyGenerale}/20 ` : "Aucune note"}</b>
+                                    </td>
+                                </tr>
                             </tbody>
                         </Table>
                     </Container>
                 </Col>
                 <Col>
                     <Container className="p-3">
-                        <Table responsive bordered hover striped size="sm">
-                            {/* {student ? (
-                                <>
+                        {student ? (
+                            <>
+                                <h2>
+                                    {student.lastName} {student.surname}
+                                </h2>
+                                <Table responsive bordered hover striped size="sm">
                                     <thead>
-                                        <h2>
-                                            {student.lastname} {student.firstname}
-                                        </h2>
                                         <tr>
                                             <th>Matière</th>
-                                            <th>Moyenne de l'élève</th>
+                                            <th>Note de l'élève</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {data.map((student) => (
-                                            <tr key={student.id} onclick={() => handleRowClick(student)}>
-                                                <td>{student.lastName}</td>
-                                                <td>{student.firstName}</td>
-                                                <td>{calculateAverage(student.grades)}/20</td>
-                                            </tr>
-                                        ))}
-                                        <td colSpan={2}>
-                                            <b>Moyenne générale de la classe :</b>
-                                        </td>
-                                        <td>
-                                            <b>{calculateAverage(moyNotes).toFixed(2)}/20</b>
-                                        </td>
+                                        {data &&
+                                            data.students.map((student, index) =>
+                                                <tr key={index}>
+                                                    <td>{student.grades.map((grade) => <div>{grade.subject.name}</div>)}</td>
+                                                    <td>{student.grades.map((grade) => <div>{grade.score}/20</div>)}</td>
+                                                </tr>
+                                            )}
                                     </tbody>
-                                </>
-                            ) : null} */}
-                        </Table>
+                                </Table>
+                            </>
+                        ) : null}
                     </Container>
                 </Col>
             </Row>
