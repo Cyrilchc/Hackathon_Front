@@ -40,23 +40,23 @@ const ExportToCSV = () => {
 
     console.log(data);
 
-    // const [gradeId, setGradeId] = React.useState();
+    const [gradeId, setGradeId] = React.useState();
 
-    // const deleteGrade = (id) => {
-    //     axios
-    //         .delete(`http://172.19.2.11:5000/api/Grade/DeleteGrade/${id}`)
-    //         .then((res) => {
-    //             console.log(res);
+    const deleteGrade = (id) => {
+        axios
+            .delete(`http://172.19.2.11:5000/api/Grade/DeleteGrade/${id}`)
+            .then((res) => {
+                console.log(res);
 
-    //             if (res.request.status === `${/20[0-9]/}`) {
-    //                 alert("Note supprimée avec succès");
-    //                 window.location.reload();
-    //             }
-    //         })
-    //         .catch((err) => {
-    //             console.log(err);
-    //         });
-    // };
+                if (res.request.status === `${/20[0-9]/}`) {
+                    alert("Note supprimée avec succès");
+                    window.location.reload();
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
 
     // const updateGrade = (e) => {
     //     e.preventDefault();
