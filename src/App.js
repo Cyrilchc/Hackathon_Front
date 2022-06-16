@@ -27,6 +27,7 @@ import SettingsView from './pages/Settings';
 import HomeView from './pages/Home';
 import AdminView from './pages/Admin'
 import { Navigate } from 'react-router-dom';
+import RechercheView from './pages/Recherche';
 
 
 /**
@@ -67,6 +68,7 @@ const App = () => {
         { path: 'settings', element: <SettingsView /> },
         { path: 'home', element: <HomeView /> }, 
         { path: 'admin', element: <AdminView /> },
+        { path: 'recherche', element: <RechercheView />},
         {
           path: "gestion-des-notes",
           element: <TeacherLayout />,

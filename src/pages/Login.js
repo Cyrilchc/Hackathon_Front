@@ -64,7 +64,7 @@ const LoginView = () => {
         <Col>
           <Container className="mt-3 p-3 shadow-lg estiam-block">
             <Container>
-              <h3>Formulaire de connexion</h3>
+              <center><h3>Formulaire de connexion</h3></center>
               <hr />
               {/**
                * Formulaire
@@ -88,16 +88,15 @@ const LoginView = () => {
                    */}
                   <Form.Label>Mot de passe</Form.Label>
                   <Form.Control type="password" placeholder="Mot de passe" onChange={(_event) => handlePasswordInput(_event.target.value)} />
-                  <Button className="estiam-btn">Mot de passe oublié ?</Button>
+                  <a href=""><center>Mot de passe oublié ?</center></a>
                 </Form.Group>
               </Form>
-              <hr />
               {/**
                * Button
                * Composant Button de React Bootstrap
                * onClick (lorsque l'on clique sur le bouton) => appel de la fonction handleSubmitClick
                */}
-              <Button className="estiam-btn" onClick={() => handleSubmitClick()}>
+              <Button className="estiam-btn-center" onClick={() => handleSubmitClick()}>
                 Se connecter
               </Button>
             </Container>

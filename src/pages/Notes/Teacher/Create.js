@@ -37,7 +37,7 @@ const NotesTeacherCreateView = () => {
         <Col lg={2} sm={2}>
           <Container className="p-3">
             <Form.Group>
-              <Form.Label>Choix de la matiere</Form.Label>
+              <Form.Label>Choix de la classe</Form.Label>
               <Form.Select
                 onChange={(event) => {
                   handleSelect(event.target.value);
