@@ -42,6 +42,24 @@ const NotesTeacherDashboardView = () => {
         });
     };
 
+    // Delete Grade :
+    const [gradeId, setGradeId] = React.useState();
+
+    const deleteGrade = (id) => {
+        axios
+            .delete(`http://172.19.2.11:5000/api/Grade/DeleteGrade/${id}`)
+            .then((res) => {
+                console.log(res);
+
+                if (res.request.status === `${/20[0-9]/}`) {
+                    alert("Note supprimée avec succès");
+                    window.location.reload();
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
 
 
     React.useEffect(() => {
@@ -83,7 +101,7 @@ const NotesTeacherDashboardView = () => {
                             <tbody>
                                 {data &&
                                     data.students.map((student) => (
-                                        <tr key={student.id} onClick={() => handleRowClick(student)}>
+                                        <tr key={student.id} onClick={() => {handleRowClick(student)}}>
                                             <td>{student.lastName}</td>
                                             <td>{student.surname}</td>
                                             <td>{student.grades.length > 0 ? `${calculateAverage(student.grades).toFixed(2)}/20` : "Aucune note"}</td>
@@ -113,15 +131,19 @@ const NotesTeacherDashboardView = () => {
                                         <tr>
                                             <th>Matière</th>
                                             <th>Note de l'élève</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {data &&
-                                            data.students.map((student, index) =>
-                                                <tr key={index}>
-                                                    <td>{student.grades.map((grade) => <div>{grade.subject.name}</div>)}</td>
-                                                    <td>{student.grades.map((grade) => <div>{grade.score}/20</div>)}</td>
-                                                </tr>
+                                            data.students.map((student) => {
+                                                student.grades.map((grade) => {
+                                                    console.log(grade);
+                                                    <tr>
+                                                        <td>{grade.score}</td>
+                                                    </tr>
+                                                })
+                                                }
                                             )}
                                     </tbody>
                                 </Table>
