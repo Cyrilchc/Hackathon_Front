@@ -3,8 +3,17 @@ import { Col, Container, Form, Row, Button, Table } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import img from "../assets/lockers.jpg";
 import { AuthService } from "../services/auth.service.js";
+import axios from 'axios'
 
 const RechercheView = () => { 
+
+    React.useEffect(() => {
+        axios.get(`http://172.19.2.11:5000/api/Student/GetStudents`).then((res) => {
+            console.log(res.data);
+        });
+        // fetchData();
+    }, []);
+    
     return (
         <Container fluid>
             <Row>
