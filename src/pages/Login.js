@@ -45,7 +45,7 @@ const LoginView = () => {
    */
   //console.log(username);
   //console.log(password);
-  const handleSubmitClick = async () => AuthService.login(username, password).then((res) => (res.status === 200 ? navigate("home") : null));
+  const handleSubmitClick = async () => AuthService.login(username, password).then((res) => (res.status === 200 ? navigate("/planning") : null));
 
   /*.then((response) => {
     console.log(response)
