@@ -6,8 +6,6 @@ import { AuthService } from "../services/auth.service.js";
 import axios from 'axios'
 import { data } from "jquery";
 import { useState } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
 
 
 const RechercheView = () => { 
