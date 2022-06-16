@@ -9,7 +9,12 @@ const AdminView = () => {
 
     const postUser = async (e) => {
         e.preventDefault();
-        if('genre' == 1){
+
+        var roleSelect = document.getElementById('role_id');
+        var roleValue = roleSelect.options[roleSelect.selectedIndex].value;
+        console.log(roleValue);
+
+        if(roleValue == 1){
             axios
             .post("http://172.19.2.11:5000/api/Student/CreateStudent", {
                 lastName: document.getElementById('formLastname_id').value,
@@ -71,9 +76,9 @@ const AdminView = () => {
                             <Form.Label>Classe<span class="obligatoire">*</span></Form.Label>
                             <Form.Control id="formgroupID_id" placeholder="Classe"/>
                         </Form.Group>
-                        <Form.Group id='genre' className="mb-3">
+                        <Form.Group className="mb-3">
                             <Form.Label>Rôle<span class="obligatoire">*</span></Form.Label>
-                            <Form.Select>
+                            <Form.Select id="role_id">
                                 <option selected>Selectionner une option...</option>
                                 <option value="2">Professeur</option>
                                 <option value="1">Eleve</option>
