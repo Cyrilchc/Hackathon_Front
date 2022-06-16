@@ -25,7 +25,7 @@ const NotesTeacherDashboardView = () => {
 
     const fetchGroupData = (groupId) => {
         let moyNotes = [];
-        setMoyenneGenerale()
+        setMoyenneGenerale();
 
         axios.get(`http://172.19.2.11:5000/api/Group/GetGroup/${groupId}`).then((res) => {
             setData(res.data);
@@ -37,7 +37,7 @@ const NotesTeacherDashboardView = () => {
             });
 
             if (moyNotes.length > 0) {
-                setMoyenneGenerale(calculateAverage(moyNotes).toFixed(2))
+                setMoyenneGenerale(calculateAverage(moyNotes).toFixed(2));
             }
         });
     };
@@ -49,8 +49,6 @@ const NotesTeacherDashboardView = () => {
         axios
             .delete(`http://172.19.2.11:5000/api/Grade/DeleteGrade/${id}`)
             .then((res) => {
-                console.log(res);
-
                 if (res.request.status === `${/20[0-9]/}`) {
                     alert("Note supprimée avec succès");
                     window.location.reload();
@@ -61,12 +59,11 @@ const NotesTeacherDashboardView = () => {
             });
     };
 
-
     React.useEffect(() => {
         axios.get(`http://172.19.2.11:5000/api/Group/GetGroups`).then((res) => {
             setGroup(res.data);
             fetchGroupData(res.data[0].id);
-        })
+        });
     }, []);
 
     return (
@@ -74,7 +71,9 @@ const NotesTeacherDashboardView = () => {
             <Row>
                 <Container className="p-3">
                     <Form.Group>
-                        <Form.Label><b>Choix de la classe</b></Form.Label>
+                        <Form.Label>
+                            <b>Choix de la classe</b>
+                        </Form.Label>
                         <Form.Select
                             onChange={(e) => {
                                 fetchGroupData(e.target.value);
@@ -101,7 +100,12 @@ const NotesTeacherDashboardView = () => {
                             <tbody>
                                 {data &&
                                     data.students.map((student) => (
-                                        <tr key={student.id} onClick={() => {handleRowClick(student)}}>
+                                        <tr
+                                            key={student.id}
+                                            onClick={() => {
+                                                handleRowClick(student);
+                                            }}
+                                        >
                                             <td>{student.lastName}</td>
                                             <td>{student.surname}</td>
                                             <td>{student.grades.length > 0 ? `${calculateAverage(student.grades).toFixed(2)}/20` : "Aucune note"}</td>
@@ -131,20 +135,30 @@ const NotesTeacherDashboardView = () => {
                                         <tr>
                                             <th>Matière</th>
                                             <th>Note de l'élève</th>
-                                            <th>Actions</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {data &&
                                             data.students.map((student) => {
-                                                student.grades.map((grade) => {
-                                                    console.log(grade);
-                                                    <tr>
-                                                        <td>{grade.score}</td>
-                                                    </tr>
-                                                })
-                                                }
-                                            )}
+                                                return student.grades.map((grade) => {
+                                                    return (
+                                                        <tr key={grade.id}>
+                                                            <td>{grade.subject.name}</td>
+                                                            <td>{grade.score}</td>
+                                                            <td>
+                                                                <button
+                                                                    onClick={() => {
+                                                                        deleteGrade(grade.id);
+                                                                    }}
+                                                                >
+                                                                    Supprimer
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    );
+                                                });
+                                            })}
                                     </tbody>
                                 </Table>
                             </>
