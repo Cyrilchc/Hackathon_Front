@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import TchatMessage from '../../components/Tchat/TchatMessage'
 import { BiArrowBack } from 'react-icons/bi'
@@ -14,14 +14,18 @@ const Tchat = (props) => {
 
 	let [tchatData, setTchatData] = useState({});
 
-	useEffect(() => {
-		scrollDown();
+	let ref = useRef(null);
 
-		setInterval(() => {
+	useEffect(() => {
+		ref.current = setInterval(() => {
 			axios.get(`http://172.19.2.11:5000/api/Message/GetChatMessages/${id}`).then(res => {
 				setTchatData(res.data);
+				scrollDown();
 			});
 		}, 3000);
+		return () => {
+			clearInterval(ref.current);
+		}
     }, []);
 
 	let scrollDown = () => {
@@ -34,12 +38,16 @@ const Tchat = (props) => {
 		document.querySelector('textarea#message').value = '';
 		let toSend =  {
 			textMessage: message,
-			fromPersonId: 2,
+			fromPersonId: 18,
 			sentDate: moment().toISOString(),
 			chatId: id,
 		}
 		axios.post("http://172.19.2.11:5000/api/Message/CreateMessage", toSend).then(res => {
 			console.log(res);
+		});
+		axios.get(`http://172.19.2.11:5000/api/Message/GetChatMessages/${id}`).then(res => {
+			setTchatData(res.data);
+			scrollDown();
 		});
 	}
 

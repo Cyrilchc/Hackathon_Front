@@ -35,11 +35,10 @@ const TchatAccueil = props => {
                             <Card.Title>Anciens tchats</Card.Title>
                             <Card.Text style={{ display: "flex", gap: "5px", flexWrap: "wrap" }}>
                                 {oldData?.map((object) => (
-                                    console.log(object),
-                                    <TchatCard element={object} />
+                                    <TchatCard key={object.id} element={object} />
                                 ))}
                             </Card.Text>
-                            <Link to="/tchat/liste/old"><button class="btn btn-primary" type="submit">Anciens tchats</button></Link>
+                            <Link to="/tchat/liste/old"><button className="btn btn-primary" type="submit">Anciens tchats</button></Link>
                         </Card.Body>
                     </Card>
                 </div>
@@ -49,10 +48,10 @@ const TchatAccueil = props => {
                             <Card.Title>Tchats en cours</Card.Title>
                             <Card.Text style={{ display: "flex", gap: "5px", flexWrap: "wrap" }}>
                                 {currentData?.map((object) => (
-                                    <TchatCard content={object} />
+                                    <TchatCard key={object.id} content={object} />
                                 ))}
                             </Card.Text>
-                            <Link to="/tchat/liste/current"><button class="btn btn-primary" type="submit">Tchats en cours</button></Link>
+                            <Link to="/tchat/liste/current"><button className="btn btn-primary" type="submit">Tchats en cours</button></Link>
                         </Card.Body>
                     </Card>
                     <Card className="mb-3" >
@@ -60,17 +59,17 @@ const TchatAccueil = props => {
                             <Card.Title>Prochains tchats</Card.Title>
                             <Card.Text style={{ display: "flex", gap: "5px", flexWrap: "wrap" }}>
                                 {newData?.map((object) => (
-                                    <TchatCard content={object} />
+                                    <TchatCard key={object.id} content={object} />
                                 ))}
                             </Card.Text>
-                            <Link to="/tchat/liste/new"><button class="btn btn-primary" type="submit">Prochains tchats</button></Link>
+                            <Link to="/tchat/liste/new"><button className="btn btn-primary" type="submit">Prochains tchats</button></Link>
                         </Card.Body>
                     </Card>
                     {props.type === "teacher" &&
                         <Card className="mb-3" >
                             <Card.Body>
                                 <Card.Title>Créer un nouveau tchat</Card.Title>
-                                <Link to="create"><button class="btn btn-primary" type="submit">Créer</button></Link>
+                                <Link to="create"><button className="btn btn-primary" type="submit">Créer</button></Link>
                             </Card.Body>
                         </Card>
                     }
@@ -79,7 +78,5 @@ const TchatAccueil = props => {
         </div>
     )
 }
-
-TchatAccueil.propTypes = {}
 
 export default TchatAccueil

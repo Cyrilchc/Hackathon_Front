@@ -13,7 +13,7 @@ const TchatCard = (props) => {
     const onCardClick = (id) => {
         navigate(`/tchat/${id}`);
     }
-    // console.log(props.element.id);
+    
     return (
         <Card
             style={{ width: '18rem', cursor: 'pointer' }}
@@ -24,11 +24,11 @@ const TchatCard = (props) => {
             <Card.Header>
                 <div className="d-flex">
                     {props.element?.id}
-                    {/* <div className="container-fluid d-flex justify-content-end">
+                    <div className="container-fluid d-flex justify-content-end">
                         <Link to="/tchat/update/{id}">
-                            <button class="btn btn-primary" type="submit">Modifier</button>
+                            <button className="btn btn-primary" type="submit">Modifier</button>
                         </Link>
-                    </div> */}
+                    </div>
                 </div>
             </Card.Header>
 
