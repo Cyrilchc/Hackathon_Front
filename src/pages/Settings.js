@@ -17,20 +17,20 @@ const SettingsView = () => {
       <Row>
         <Col>
           <Container className="p-3">
-            <h3>Coordonnees</h3>
+            <h3>Coordonnées</h3>
             <hr />
             <Container className="p-3 shadow-lg border">
               <Form>
                 <Form.Group as={Row} className="mb-3">
-                  <Form.Label as={Col}>Mail</Form.Label>
+                  <Form.Label as={Col}>Email</Form.Label>
                   <Col>
-                    <Form.Control />
+                    <Form.Control placeholder="Email" />
                   </Col>
                 </Form.Group>
-                <Form.Group as={Row} className="mb-3">
-                  <Form.Label as={Col}>Telephone</Form.Label>
+                <Form.Group as={Row}  className="mb-3">
+                  <Form.Label as={Col}>Télephone</Form.Label>
                   <Col>
-                    <Form.Control />
+                    <Form.Control placeholder="Télephone" />
                   </Col>
                 </Form.Group>
               </Form>
@@ -47,7 +47,10 @@ const SettingsView = () => {
                   <Form.Label as={Col}>Police</Form.Label>
                   <Col>
                     <Form.Select>
-                      <option>11</option>
+                      <option>12</option>
+                      <option>14</option>
+                      <option>16</option>
+                      <option>18</option>
                     </Form.Select>
                   </Col>
                 </Form.Group>
@@ -66,6 +69,7 @@ const SettingsView = () => {
                   <Col>
                     <Form.Select>
                       <option>Francais</option>
+                      <option>Anglais</option>
                     </Form.Select>
                   </Col>
                 </Form.Group>
@@ -73,7 +77,7 @@ const SettingsView = () => {
                   <Form.Label as={Col}>Theme</Form.Label>
                   <Col>
                     <Form.Select>
-                     
+                      <option>Clair</option>
                       <option>Sombre</option>
                     </Form.Select>
                   </Col>
@@ -82,10 +86,10 @@ const SettingsView = () => {
             </Container>
           </Container>
         </Col>
-        <Button className="estiam-btn">
-          Enregistrer
-        </Button>
       </Row>
+      <Button id="enregistrer-setting" className="estiam-btn">
+          Enregistrer
+          </Button>
     </Container>
   );
 };

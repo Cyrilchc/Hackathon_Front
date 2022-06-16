@@ -26,8 +26,10 @@ const RechercheView = () => {
                             <Form.Group className="mb-3">
                                     <Form.Control/>
                             </Form.Group>
-                            <Button className='estiam-btn-center'>Chercher</Button>
-                            <Button className='estiam-btn-center'>Créer</Button>
+                            <div className="estiam-btn-container-flex-sympa-lmao">
+                                <Button className='estiam-btn-center'>Rechercher</Button>
+                                <Button href="admin" className='estiam-btn-center'>Créer</Button>
+                            </div>
                         </Container>
                         <Table striped bordered hover>
                           <thead>
