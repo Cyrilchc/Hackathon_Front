@@ -17,11 +17,11 @@ const Tchat = (props) => {
 	useEffect(() => {
 		scrollDown();
 
-		// setInterval(() => {
+		setInterval(() => {
 			axios.get(`http://172.19.2.11:5000/api/Message/GetChatMessages/${id}`).then(res => {
 				setTchatData(res.data);
 			});
-		// }, 3000);
+		}, 3000);
     }, []);
 
 	let scrollDown = () => {
@@ -31,6 +31,7 @@ const Tchat = (props) => {
 
 	let sendMessage = () => {
 		let message = document.querySelector('textarea#message').value;
+		document.querySelector('textarea#message').value = '';
 		let toSend =  {
 			textMessage: message,
 			fromPersonId: 2,
@@ -61,7 +62,7 @@ const Tchat = (props) => {
 					<div className='card-body'>
 						<div className='tchat' style={{overflow: "hidden auto", maxHeight:'60vh'}}>
 							{tchatData.messages?.map((message) => {
-								message.isAuthor = message.from.id === 0 // Replace with login user
+								message.isAuthor = message.from.id === 2 // Replace with login user
 								return <TchatMessage key={message.id} message={message} />
 							})}
 						</div>
@@ -70,7 +71,7 @@ const Tchat = (props) => {
 								<FloatingLabel
 									label='Message'
 								>
-									<Form.Control id="message" as="textarea" placeholder="comments" style={{maxHeight:"400px"}}></Form.Control>
+									<Form.Control id="message" as="textarea" placeholder="message" style={{maxHeight:"400px"}}></Form.Control>
 								</FloatingLabel>
 							</div>
 							<button className='btn btn-primary mt-4 col-2' style={{maxHeight:"45px"}} onClick={sendMessage}>Envoyer <TbSend /></button>

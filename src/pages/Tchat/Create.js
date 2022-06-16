@@ -20,7 +20,6 @@ const TchatCreate = () => {
 		let tchat = {
 			name: document.getElementById('title').value,
 			comment: document.getElementById('comment').value,
-			sendNotification: document.getElementById('notifications').checked,
 			chatAffectations: selectedParticipants ? selectedParticipants.map(participant => { return { id: participant.value }; }) : [],
 			startDateTime: moment(document.getElementById('startdatetime').value, ["DD/MM/YYYY h:mm"]).toISOString(),
 			endDateTime: moment(document.getElementById('enddatetime').value, ["DD/MM/YYYY h:mm"]).toISOString(),
@@ -61,13 +60,6 @@ const TchatCreate = () => {
 					>
 						<Form.Control id="comment" as="textarea" placeholder="comments"></Form.Control>
 					</FloatingLabel>
-					<div className='form-floating mb-2'>
-						<h5>Notifications :</h5>
-						<div className='form-check'>
-							<input className="form-check-input" type="checkbox" value="" id="notifications" defaultChecked={true} />
-							<label className="form-check-label" htmlFor="notifications">Notifier les participants</label>
-						</div>
-					</div>
 					<div className='d-grid gap-2 col-6 mx-auto'>
 						<button className='btn btn-primary' onClick={onCreate}>Créer</button>
 					</div>

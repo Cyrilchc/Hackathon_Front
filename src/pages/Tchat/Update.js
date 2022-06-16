@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
 import { FloatingLabel, Form } from 'react-bootstrap'
 import Select from 'react-select'
 import moment from 'moment'
@@ -8,6 +8,7 @@ import axios from 'axios'
 import 'moment/locale/fr'
 
 const TchatUpdate = () => {
+	let navigate = useNavigate();
 	let { id } = useParams();
 
 	let [tchatData, setTchatData] = useState({});
@@ -31,7 +32,6 @@ const TchatUpdate = () => {
 			id,
 			name: document.getElementById('title').value,
 			comment: document.getElementById('comment').value,
-			sendNotification: document.getElementById('notifications').checked,
 			chatAffectations: selectedParticipants ? selectedParticipants.map(participant => { return { id: participant.value }; }) : [],
 			startDateTime: moment(document.getElementById('startdatetime').value, ["DD/MM/YYYY h:mm"]).toISOString(),
 			endDateTime: moment(document.getElementById('enddatetime').value, ["DD/MM/YYYY h:mm"]).toISOString(),
@@ -42,6 +42,7 @@ const TchatUpdate = () => {
 
 	let deleteTchat = () => {
 		axios.delete(`http://172.19.2.11:5000/api/Chat/DeleteChat/${id}`);
+		Navigate('/tchat');
 	}
 
 	return (
@@ -76,13 +77,6 @@ const TchatUpdate = () => {
 					>
 						<Form.Control as="textarea" placeholder="comments" defaultValue={tchatData.comment}></Form.Control>
 					</FloatingLabel>
-					<div className='form-floating mb-2'>
-						<h5>Notifications :</h5>
-						<div className='form-check'>
-							<input className="form-check-input" type="checkbox" value="" id="notifications" defaultChecked={true} />
-							<label className="form-check-label" htmlFor="notifications">Notifier les participants</label>
-						</div>
-					</div>
 					<div className='row'>
 						<div className='d-grid gap-2 col-5 mx-auto'>
 							<button onClick={deleteTchat} className='btn btn-danger'>Supprimer</button>
