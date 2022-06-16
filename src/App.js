@@ -17,6 +17,7 @@ import StudentTeacherView from './pages/Notes/Teacher/Student'
 import LoginView from './pages/Login';
 import TeacherLayout from './layouts/Notes/Teacher/TeacherLayout';
 import NotesTeacherDashboardView from './pages/Notes/Teacher/Dashboard';
+import NotesStudentDashboardView from './pages/Notes/DashboardStudent';
 import NotesTeacherCreateView from './pages/Notes/Teacher/Create';
 import TchatCreate from './pages/Tchat/Create';
 import TchatUpdate from './pages/Tchat/Update';
@@ -78,6 +79,7 @@ const App = () => {
             { path: "creation/:id", element: <StudentTeacherView /> },
 
             { path: "visualisation", element: <NotesTeacherDashboardView /> },
+            { path: "visualisationStudent/:id", element: <NotesStudentDashboardView /> },
           ],
         },
       ],
