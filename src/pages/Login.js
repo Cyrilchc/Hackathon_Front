@@ -46,12 +46,12 @@ const LoginView = () => {
   //console.log(username);
   //console.log(password);
   const handleSubmitClick = async () => AuthService.login(username, password).then((res) => (res.status === 200 ? navigate("home") : null));
-  /*
-  .then((response) => {
+
+  /*.then((response) => {
     console.log(response)
     if(response.status === 200)
     {
-
+      const Connected=true
     }
   });
   /**
