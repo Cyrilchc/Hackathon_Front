@@ -4,17 +4,26 @@ import '../../App.css'
 import TchatCard from "./TchatCard";
 import { useEffect } from "react";
 import axios from "axios";
-// import axios from 'axios';
+import { useState } from "react";
+
 
 const TchatAccueil = props => {
-    // useEffect(() => {
-    //     axios.get('http://localhost:5000/api/Chat/')
-    //     console.log(axios.get('http://localhost:5000/api/Chat/'))
-    // }, [])
+    const [oldData, setOldData] = useState([]);
+    const [currentData, setcurrentData] = useState([]);
+    const [newData, setnewData] = useState([]);
 
-    let ancienCours = [];
-    let coursActuels = [];
-    let futurCours = [];
+    useEffect(() => {
+        axios.get("http://172.19.2.11:5000/api/Chat/GetOldChats").then(res => {
+            setOldData(res.data);
+        });
+        axios.get("http://172.19.2.11:5000/api/Chat/GetCurrentChats").then(res => {
+            setcurrentData(res.data);
+        });
+        axios.get("http://172.19.2.11:5000/api/Chat/GetUpcomingChats").then(res => {
+            setnewData(res.data);
+        });
+
+    }, [])
 
     return (
         <div className="container-fluid">
@@ -25,8 +34,9 @@ const TchatAccueil = props => {
                         <Card.Body>
                             <Card.Title>Anciens tchats</Card.Title>
                             <Card.Text style={{ display: "flex", gap: "5px", flexWrap: "wrap" }}>
-                                {ancienCours.map((object) => (
-                                    <TchatCard content={object} />
+                                {oldData?.map((object) => (
+                                    console.log(object),
+                                    <TchatCard element={object} />
                                 ))}
                             </Card.Text>
                             <Link to="/tchat/liste/old"><button class="btn btn-primary" type="submit">Anciens tchats</button></Link>
@@ -38,7 +48,7 @@ const TchatAccueil = props => {
                         <Card.Body>
                             <Card.Title>Tchats en cours</Card.Title>
                             <Card.Text style={{ display: "flex", gap: "5px", flexWrap: "wrap" }}>
-                                {coursActuels.map((object) => (
+                                {currentData?.map((object) => (
                                     <TchatCard content={object} />
                                 ))}
                             </Card.Text>
@@ -49,7 +59,7 @@ const TchatAccueil = props => {
                         <Card.Body>
                             <Card.Title>Prochains tchats</Card.Title>
                             <Card.Text style={{ display: "flex", gap: "5px", flexWrap: "wrap" }}>
-                                {futurCours.map((object) => (
+                                {newData?.map((object) => (
                                     <TchatCard content={object} />
                                 ))}
                             </Card.Text>
