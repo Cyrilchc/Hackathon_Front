@@ -13,13 +13,8 @@ const Tchat = (props) => {
 	let { id } = useParams();
 
 	let [tchatData, setTchatData] = useState({});
-	let [students, setStudents] = React.useState([]);
-	let [selectedParticipants, setSelectedParticipants] = React.useState(null);
 
 	useEffect(() => {
-		axios.get('http://172.19.2.11:5000/api/Student/GetStudents').then(res => {
-			setStudents(res.data.map(student => { return { value: student.id, label: `${student.lastname} ${student.surname}`}; }));
-		});
 		scrollDown();
 
 		// setInterval(() => {
@@ -38,7 +33,7 @@ const Tchat = (props) => {
 		let message = document.querySelector('textarea#message').value;
 		let toSend =  {
 			textMessage: message,
-			fromPersonId: 1,
+			fromPersonId: 2,
 			sentDate: moment().toISOString(),
 			chatId: id,
 		}

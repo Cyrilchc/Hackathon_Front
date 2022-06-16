@@ -44,7 +44,7 @@ const TchatUpdate = () => {
 		axios.delete(`http://172.19.2.11:5000/api/Chat/DeleteChat/${id}`);
 	}
 
-  return (
+	return (
 		<div className='container' style={{position: 'absolute', top: '50%', left: '50%', transform: 'translate3d(-50%,-50%,0)'}}>
 			<div className='card'>
 				<div className='card-body'>
@@ -94,7 +94,7 @@ const TchatUpdate = () => {
 				</div>
 			</div>
 		</div>
-  )
+	)
 }
 
 export default TchatUpdate
