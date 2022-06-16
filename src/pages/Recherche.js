@@ -3,13 +3,22 @@ import { Col, Container, Form, Row, Button, Table } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import img from "../assets/lockers.jpg";
 import { AuthService } from "../services/auth.service.js";
+import axios from 'axios'
 
 const RechercheView = () => { 
+
+    React.useEffect(() => {
+        axios.get(`http://172.19.2.11:5000/api/Student/GetStudents`).then((res) => {
+            console.log(res.data);
+        });
+        // fetchData();
+    }, []);
+    
     return (
         <Container fluid>
             <Row>
                 <Col>
-                    <Container id="contact-form" className="p-3 shadow-lg estiam-block mt-3">
+                    <Container id="recherche-liste" className="p-3 shadow-lg estiam-block mt-3">
                         <Container className="mt-3">
                             <h2><center>Liste</center></h2>
                             <hr />
@@ -17,8 +26,8 @@ const RechercheView = () => {
                             <Form.Group className="mb-3">
                                     <Form.Control/>
                             </Form.Group>
-                            <button className='estiam-btn'>Chercher</button>
-                            <button className='estiam-btn'>Créer</button>
+                            <Button className='estiam-btn-center'>Chercher</Button>
+                            <Button className='estiam-btn-center'>Créer</Button>
                         </Container>
                         <Table striped bordered hover>
                           <thead>
