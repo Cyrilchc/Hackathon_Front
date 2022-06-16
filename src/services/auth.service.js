@@ -13,7 +13,7 @@ export class AuthService {
         //console.log(config)
         const _body = JSON.stringify({mail: config.username, password: config.password})
         console.log(_body)
-        const rawResponse = await fetch('https://172.19.2.11:5000/api/Token', {
+        const rawResponse = await fetch('http://172.19.2.11:5000/api/Token', {
             method: 'POST',
             headers: {
               'Accept': 'application/json',
