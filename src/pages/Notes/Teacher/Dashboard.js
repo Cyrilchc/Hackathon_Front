@@ -43,13 +43,11 @@ const NotesTeacherDashboardView = () => {
     };
 
     // Delete Grade :
-    const [gradeId, setGradeId] = React.useState();
-
     const deleteGrade = (id) => {
         axios
             .delete(`http://172.19.2.11:5000/api/Grade/DeleteGrade/${id}`)
             .then((res) => {
-                if (res.request.status === `${/20[0-9]/}`) {
+                if (res.request.status === 204) {
                     alert("Note supprimée avec succès");
                     window.location.reload();
                 }
