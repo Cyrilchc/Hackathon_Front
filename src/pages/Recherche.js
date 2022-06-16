@@ -6,6 +6,7 @@ import { AuthService } from "../services/auth.service.js";
 import axios from 'axios'
 import { data } from "jquery";
 import { useState } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
 
@@ -29,13 +30,34 @@ const RechercheView = () => {
          });
          // fetchData();
      }, []);
+
+    const deleteStudent = (studentId) => {
+        axios.delete('http://172.19.2.11:5000/api/Student/DeleteStudent/'+studentId).then((res) => {
+            console.log(res.data);
+
+            axios.get(`http://172.19.2.11:5000/api/Student/GetStudents`).then((res) => {
+                console.log(res.data);
+                setData(res.data);
+            });
+        });
+    };
     
+    const deleteTeacher = (teacherId) => {
+        axios.delete('http://172.19.2.11:5000/api/Teacher/DeleteTeacher/'+teacherId).then((res) => {
+            console.log(res.data);
+
+            axios.get(`http://172.19.2.11:5000/api/Teacher/GetTeachers`).then((res) => {
+                console.log(res.data);
+                setTeacherData(res.data);
+            });
+        });
+    };
+
     return (
         <Container fluid>
-            <Row>
-                <Col>
+         
                     <Container id="recherche-liste" className="p-3 shadow-lg estiam-block mt-3">
-                        <Container className="mt-3">
+                
                             <h2><center>Liste</center></h2>
                             <hr />
                               
@@ -46,9 +68,7 @@ const RechercheView = () => {
                                 <Button className='estiam-btn-center'>Rechercher</Button>
                                 <Button href="admin" className='estiam-btn-center'>Créer</Button>
                             </div>
-                        </Container>
-
-                        <Table striped bordered hover>
+                            <Table striped bordered hover>
                           <thead>
                             <tr>
                               <th>Nom</th>
@@ -56,7 +76,7 @@ const RechercheView = () => {
                               <th>Email</th>
                               <th>Classe</th>
                               <th>Rôle</th>
-                              <th>Modifier</th>
+                              <th>Action</th>
                             </tr>
                             {teacherData?.map((element) => {
                                 return(
@@ -66,7 +86,9 @@ const RechercheView = () => {
                                     <th>{element.mail}</th>
                                     <th>{element.groupID}</th>
                                     <th>{element.discriminator}</th>
+                                    <th><Button className='estiam-btn-center' onClick={() => deleteTeacher(element.id)}>X</Button></th>
                                 </tr>
+                                
                                 )
                             })}
                             {data?.map((element) => {
@@ -77,15 +99,13 @@ const RechercheView = () => {
                                     <th>{element.mail}</th>
                                     <th>{element.groupID}</th>
                                     <th>{element.discriminator}</th>
+                                    <th><Button className='estiam-btn-center' onClick={() => deleteStudent(element.id)}>X</Button></th>
                                 </tr>
                                 )
                             })}
                            </thead>
                         </Table>
                     </Container>
-                </Col>
-                <Col></Col>
-            </Row>
         </Container>
     )
 }

@@ -62,11 +62,11 @@ const AdminView = () => {
                     <Form onSubmit={postUser}>
                         <Form.Group className="mb-3">
                             <Form.Label>Nom<span class="obligatoire">*</span></Form.Label>
-                            <Form.Control id="formLastname_id" placeholder="Nom"/>
+                            <Form.Control required id="formLastname_id" placeholder="Nom"/>
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Prénom<span class="obligatoire">*</span></Form.Label>
-                            <Form.Control id="formsurname_id" placeholder="Prénom"/>
+                            <Form.Control required id="formsurname_id" placeholder="Prénom"/>
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Email</Form.Label>
@@ -74,7 +74,7 @@ const AdminView = () => {
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Classe<span class="obligatoire">*</span></Form.Label>
-                            <Form.Control id="formgroupID_id" placeholder="Classe"/>
+                            <Form.Control required id="formgroupID_id" placeholder="Classe"/>
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Rôle<span class="obligatoire">*</span></Form.Label>
