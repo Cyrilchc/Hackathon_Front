@@ -62,12 +62,11 @@ const NotesTeacherDashboardView = () => {
     React.useEffect(() => {
         axios.get(`http://172.19.2.11:5000/api/Group/GetGroups`).then((res) => {
             setGroup(res.data);
- 
-
-
             fetchGroupData(res.data[0].id);
         });
     }, []);
+
+    
 
     return (
         <Container fluid>
@@ -146,9 +145,7 @@ const NotesTeacherDashboardView = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {data &&
-                                            data.students.map((student) => {
-                                                return student.grades.map((grade) => {
+                                       {student.grades.map((grade) => {
                                                     return (
                                                         <tr key={grade.id}>
                                                             <td>{grade.subject.name}</td>
@@ -164,8 +161,8 @@ const NotesTeacherDashboardView = () => {
                                                             </td>
                                                         </tr>
                                                     );
-                                                });
-                                            })}
+                                                })}
+                                            
                                     </tbody>
                                 </Table>
                             </>
