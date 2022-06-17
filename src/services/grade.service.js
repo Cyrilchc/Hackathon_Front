@@ -1,8 +1,8 @@
 import API from "../config/axios";
 
-const URL = "/notes";
+const URL = "/Grade";
 
-export class NoteService {
+export class GradeService {
     /**
      * index function
      * @param {*} _class
@@ -29,7 +29,7 @@ export class NoteService {
         return API()
             .get(`${URL}`, config)
             .then((response) => response.data)
-            .catch((error) => error.message);
+            .catch((error) => console.error(error.message));
     }
 
     static store() {
@@ -38,5 +38,10 @@ export class NoteService {
 
     static destroy() {}
 
-    static find() {}
+    static find(id) {
+        return API()
+        .get(`${URL}/GetStudentGrades/${id}`)
+        .then((response) => response.data)
+        .catch((error) => console.error(error.message))
+    }
 }

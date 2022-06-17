@@ -2,10 +2,11 @@ import axios from "axios";
 
 // Ajouter a la variable apiUrl l'adresse de l'API
 const apiUrl = "http://172.19.2.11:5000/api";
+//const apiUrl = "http://172.19.2.10:5000/api";
+
 
 const baseApi = axios.create({
     baseURL: apiUrl,
-    withCredentials: true,
     headers : {
         'Content-Type': 'application/json'
     }

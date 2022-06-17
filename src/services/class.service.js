@@ -6,10 +6,17 @@ export class ClassService {
 
   
   static index(id) {
-    return axios
-      .get(`http://172.19.2.11:5000/api/Student/GetStudent/${id}`)
+    return API()
+      .get(`${URL}/GetStudents`)
       .then((response) => response.data)
-      .catch((error) => error.message);
+      .catch((error) => console.error(error.message));
+  }
+
+  static find(id) {
+    return API()
+    .get(`${URL}/GetStudent/${id}`)
+    .then((response) => response.data)
+    .catch((error) => console.error(error.message))
   }
   static store() {}
   static destroy() {}
