@@ -143,7 +143,7 @@ const NotesTeacherDashboardView = () => {
                                                     return (
                                                         <tr key={grade.id}>
                                                             <td>{grade.subject.name}</td>
-                                                            <td>{grade.score}</td>
+                                                            <td>{grade.score}/20</td>
                                                             <td>
                                                                 <button
                                                                     onClick={() => {
