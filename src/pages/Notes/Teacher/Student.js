@@ -28,7 +28,7 @@ const StudentTeacherView = () => {
             .then((res) => {
                 console.log(res);
 
-                if (res.request.status === 200) {
+                if (res.request.status === `${/20[0-9]/}`) {
                     alert("Note ajoutée avec succès");
                     window.location.reload();
                 }
