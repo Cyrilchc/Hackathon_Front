@@ -1,19 +1,25 @@
 import axios from "axios";
 
 // Ajouter a la variable apiUrl l'adresse de l'API
-const apiUrl = ""
+const apiUrl = "http://172.19.2.11:5000/api";
 
 
-const baseUrl = axios.create({
-    baseURL : apiUrl,
-    withCredentials : true
-})
 
-const API = () => {
-    let token = localStorage.getItem("token")
-    if(token) {
-
+const baseApi = axios.create({
+    baseURL: apiUrl,
+    headers : {
+        'Content-Type': 'application/json'
     }
-}
+});
 
-export default API
+
+
+let API = () => {
+     const token = localStorage.getItem("token");
+     if (token) {
+        baseApi.defaults.headers.common["Authorization"] = token;
+     }
+     return baseApi
+};
+
+export default API;

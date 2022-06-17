@@ -10,11 +10,11 @@ const HomeView = () => {
         <Container className="estiam-container" fluid style={{ backgroundImage: `url(${classRoom})`, backgroundSize: 'cover' }}>
             <Row>
                 <Col>
-                    <Container className="p-3 shadow-lg estiam-block mt-3">
+                    <Container id="contact-form" className="p-3 shadow-lg estiam-block mt-3">
                         <Container className="mt-3">
-                            <h2>Estiam Pronote</h2>
+                            <h2><center>Estiam Pronote</center></h2>
                             <hr />
-                            <Button className="estiam-btn">Consulter</Button>
+                            <Button className="estiam-btn-center">Consulter</Button>
                         </Container>
                     </Container>
                 </Col>

@@ -13,9 +13,11 @@ import MainLayout from './layouts/MainLayout';
 //theo//
 import PlanningView from './pages/Planning';
 import ContactView from './pages/Contact';
+import StudentTeacherView from './pages/Notes/Teacher/Student'
 import LoginView from './pages/Login';
 import TeacherLayout from './layouts/Notes/Teacher/TeacherLayout';
 import NotesTeacherDashboardView from './pages/Notes/Teacher/Dashboard';
+import NotesStudentDashboardView from './pages/Notes/DashboardStudent';
 import NotesTeacherCreateView from './pages/Notes/Teacher/Create';
 import TchatCreate from './pages/Tchat/Create';
 import TchatUpdate from './pages/Tchat/Update';
@@ -26,6 +28,7 @@ import SettingsView from './pages/Settings';
 import HomeView from './pages/Home';
 import AdminView from './pages/Admin'
 import { Navigate } from 'react-router-dom';
+import RechercheView from './pages/Recherche';
 
 
 /**
@@ -67,17 +70,22 @@ const App = () => {
         { path: 'settings', element: <SettingsView /> },
         { path: 'home', element: <HomeView /> }, 
         { path: 'admin', element: <AdminView /> },
+        { path: 'recherche', element: <RechercheView />},
         {
-          path: 'gestion-des-notes', element: <TeacherLayout />, children: [
-            { path: '', element: <Navigate to="creation" /> },
-            { path: 'creation', element: <NotesTeacherCreateView /> }, 
-            { path: 'visualisation', element : <NotesTeacherDashboardView/>}
-          ]
-        }
+          path: "gestion-des-notes",
+          element: <TeacherLayout />,
+          children: [
+            { path: "", element: <Navigate to="creation" /> },
+            { path: "creation", element: <NotesTeacherCreateView /> },
+            { path: "creation/:id", element: <StudentTeacherView /> },
 
-      ]
-    }
-  ])
+            { path: "visualisation", element: <NotesTeacherDashboardView /> },
+            { path: "visualisationStudent/:id", element: <NotesStudentDashboardView /> },
+          ],
+        },
+      ],
+    },
+  ]);
 
   React.useEffect(() => {
     document.title = "Estiam Pronote"

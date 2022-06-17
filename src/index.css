@@ -1,61 +1,79 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-body, html {
-  height : 100vh ;
-  background-color: #EEEEEE;
-  
+body,
+html {
+  height: 100vh;
+  background-color: #eeeeee;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
-
-.estiam-navbar { 
-  background: linear-gradient(#000033, #6633cc)
+.estiam-navbar {
+  background: linear-gradient(#000033, #6633cc);
 }
 
-.estiam-navbar a { 
-  color : white;
+.estiam-navbar a {
+  color: white;
   font-weight: bold;
   text-decoration: none;
   padding: 0.5vw;
   transition-duration: 0.2s;
 }
 
-.estiam-navbar a:hover { 
-  color : #9955ee;
+.estiam-navbar a:hover {
+  color: #9955ee;
 }
 
-.estiam-btn { 
-  color : black;
+.estiam-btn {
+  color: black;
   font-weight: bold;
   background-color: white;
-  border : 2px solid #6633cc;
+  border: 2px solid #6633cc;
   margin-top: 5px;
+  margin-right: 5px;
 }
-.estiam-btn :hover, .estiam-btn :focus{ 
-  color : white;
+.estiam-btn :hover,
+.estiam-btn :focus {
+  color: white;
   font-weight: bold;
   background-color: #6633cc;
-  border : 2px solid #6633cc;
+  border: 2px solid #6633cc;
+}
+
+.estiam-btn-center {
+  color: black;
+  font-weight: bold;
+  background-color: white;
+  border: 2px solid #6633cc;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+.estiam-btn-center :hover,
+.estiam-btn :focus {
+  color: white;
+  font-weight: bold;
+  background-color: #6633cc;
+  border: 2px solid #6633cc;
 }
 
 .estiam-block {
   background-color: white;
-  color : black ;
+  color: black;
 }
 
-.estiam-container { 
-  height : 94vh;
+.estiam-container {
+  height: 94vh;
   position: relative;
   z-index: 2;
 }
@@ -66,7 +84,6 @@ code {
   width: 100%;
   height: auto;
   opacity: 0.6;
-
 }
 .obligatoire {
   color: red;
@@ -82,4 +99,17 @@ code {
 #admin-form {
   margin: auto auto;
   width: 100%;
+}
+#recherche-liste {
+  width: 100%;
+}
+.estiam-btn-container-flex-sympa-lmao {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  margin: 1vw;
+}
+#enregistrer-setting {
+  margin-left: 47vw;
+  margin-top: 3vw;
 }

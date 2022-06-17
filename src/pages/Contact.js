@@ -11,7 +11,7 @@ const ContactView = () => {
                 <Col>
                     <Container id="contact-form" className="p-3 shadow-lg estiam-block mt-3">
                         <Container className="mt-3">
-                            <h2>Page Contact</h2>
+                            <h2><center>Page Contact</center></h2>
                             <hr />
                             <Form>
                                 <Form.Group className="mb-3">
@@ -29,7 +29,7 @@ const ContactView = () => {
                                     </div>
                                 </Form.Group>
                             </Form>
-                            <Button className="estiam-btn">SUBMIT</Button>
+                            <Button className="estiam-btn-center">SUBMIT</Button>
                         </Container>
                     </Container>
                 </Col>

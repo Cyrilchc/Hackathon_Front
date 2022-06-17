@@ -1,71 +1,86 @@
-import React from 'react'
-import { Col, Container, Row, Table, FormControl, FormSelect } from 'react-bootstrap'
-import faker from '@faker-js/faker'
+import React from "react";
+import { Col, Container, Row, Table, FormControl, FormSelect, Form, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import faker from "@faker-js/faker";
+import axios from "axios";
 
 const NotesTeacherCreateView = () => {
-
     const [data, setData] = React.useState([]);
-    const [schoolClass, setSchoolClass] = React.useState(null)
+    const [group, setGroup] = React.useState();
+    const [student, setStudent] = React.useState();
 
+    const [schoolClass, setSchoolClass] = React.useState(null);
 
     /**
      * fetchData est une function qui appelera la fonction de la classe NoteService.index
      */
-    const fetchData = async () => {
-        for (let i = 0; i <= 15; i++) {
-            setData(data => [...data, {
-                // 
-                id: i,
-                lastname: faker.name.lastName(),
-                firstname: faker.name.firstName()
-            }])
-        }
-    }
-    const handleSelect = (_value) => {setSchoolClass(_value)}
-    
-    React.useEffect(() => {
-        fetchData()
-    }, [])
 
-    if (schoolClass) return (
+
+    const fetchGroupData = (groupId) => {
+
+        axios.get(`http://172.19.2.11:5000/api/Group/GetGroup/${groupId}`).then((res) => {
+            setData(res.data);
+        });
+    };
+
+   
+    React.useEffect(() => {
+        axios.get(`http://172.19.2.11:5000/api/Group/GetGroups`).then((res) => {
+            setGroup(res.data);
+
+        });
+    }, []);
+
+    return (
         <Container fluid>
             <Row>
+                <Col lg={2} sm={2}>
+                    <Container className="p-3">
+                    <Form.Group>
+                        <Form.Label>
+                            <b>Choix de la classe</b>
+                        </Form.Label>
+                        <Form.Select onChange={(e) => {
+                                fetchGroupData(e.target.value);
+                            }}>
+
+                            {group?.map((group) => (
+                                <option key={group.id} id={group.id} value={group.id}>
+                                    {group.name}
+                                </option>
+                            ))}
+                        </Form.Select>
+                    </Form.Group>
+                    </Container>
+                </Col>
                 <Col>
                     <Container className="p-3">
-                        <Table responsive bordered hover striped size='sm'>
+                        <Table responsive bordered hover striped size="sm">
                             <thead>
                                 <tr>
                                     <th>Nom</th>
                                     <th>Prenom</th>
-                                    <th>Note</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {
-                                    data?.map((element, index) => {
-                                        return <tr key={index}><td>{element.lastname}</td>
-                                            <td>{element.firstname}</td>
-                                            <td><FormControl /></td></tr>
-                                    })
-                                }
+                            {data && data.length !== 0 ?
+                                    data.students.map((student, index) => (
+
+                                        <tr key={index}>
+                                            <td>{student.lastName}</td>
+                                            <td>{student.surname}</td>
+                                            <td>
+                                                <Link to={`${student.id}`}>Ajouter une note</Link>
+                                            </td>
+                                        </tr>
+                                    )) : <tr><td colSpan={100}>Aucun eleve</td></tr>}
                             </tbody>
                         </Table>
                     </Container>
                 </Col>
-                <Col></Col>
             </Row>
         </Container>
-    )
-    else return (
-        <Container fluid>
-            <Container>
-                <FormSelect onChange={(event) => { handleSelect(event.target.value) }}>
-                    <option value="Classe 1">Classe 1</option>
-                    <option value="Classe 2">Classe 2</option>
-                </FormSelect>
-            </Container>
-        </Container>
-    )
-}
-
-export default NotesTeacherCreateView
+    );
+};
+export default NotesTeacherCreateView;
