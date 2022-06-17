@@ -1,149 +1,75 @@
 import { Link } from "react-router-dom";
 import Card from 'react-bootstrap/Card';
 import '../../App.css'
-// import axios from 'axios';
+import TchatCard from "./TchatCard";
+import { useEffect } from "react";
+import axios from "axios";
+import { useState } from "react";
+
 
 const TchatAccueil = props => {
-    // useEffect(() => {
-    //     axios.get('http://localhost:5000/api/Chat/')
-    //     console.log(axios.get('http://localhost:5000/api/Chat/'))
-    // }, [])
-    const ancienCours = [
-        {
-            cours: "Anglais",
-            professeur: "Mr. Smith",
-            dates: "Lundi",
-            heures: "8h-10h",
-            nbEtudiants: "10"
-        },
-        {
-            cours: "Mathématiques",
-            professeur: "Mr. Harnist",
-            dates: "Mardi",
-            heures: "8h-10h",
-            nbEtudiants: "20"
-        },
-        {
-            cours: "Histoire",
-            professeur: "Mrs. Doe",
-            dates: "Mercredi",
-            heures: "13h-16h",
-            nbEtudiants: "30"
-        }
-    ]
-    const coursActuels = [
-        {
-            cours: "Philosophie",
-            professeur: "Dodane",
-            dates: "Mardi",
-            heures: "15h-16h30",
-            nbEtudiants: "70"
-        }
-    ]
-    const futurCours = [
-        {
-            cours: "Géographie",
-            professeur: "Merle",
-            dates: "Jeudi",
-            heures: "16h-18h",
-            nbEtudiants: "50"
+    const [oldData, setOldData] = useState([]);
+    const [currentData, setcurrentData] = useState([]);
+    const [newData, setnewData] = useState([]);
 
-        }
-    ]
-    let personne = "";
-    if (props.type == "teacher") {
-        personne = "Professeur"
-    } else {
-        personne = "Etudiant"
-    }
+    useEffect(() => {
+        axios.get("http://172.19.2.11:5000/api/Chat/GetOldChats").then(res => {
+            setOldData(res.data);
+        });
+        axios.get("http://172.19.2.11:5000/api/Chat/GetCurrentChats").then(res => {
+            setcurrentData(res.data);
+        });
+        axios.get("http://172.19.2.11:5000/api/Chat/GetUpcomingChats").then(res => {
+            setnewData(res.data);
+        });
+
+    }, [])
+
     return (
         <div className="container-fluid">
-            <h1 className="d-flex justify-content-center">Accueil {personne}</h1>
+            <h1 className="d-flex justify-content-center">Accueil {props.type === "teacher" ? "Professeur" : "Étudiant"}</h1>
             <div className="row">
                 <div className="col">
                     <Card >
                         <Card.Body>
-                            <Card.Title>Liste de l'historique des anciens tchats</Card.Title>
+                            <Card.Title>Anciens tchats</Card.Title>
                             <Card.Text style={{ display: "flex", gap: "5px", flexWrap: "wrap" }}>
-                                {ancienCours.map((object) => (
-                                    <Card
-                                        style={{ width: '18rem' }}
-                                        className="mb-2"
-                                    >
-                                        <Card.Header>{object.cours}</Card.Header>
-
-                                        <Card.Body>
-                                            <Card.Title>{object.cours}</Card.Title>
-                                            <Card.Subtitle>{object.professeur}</Card.Subtitle>
-                                            <Card.Subtitle>{object.dates},{object.heures}</Card.Subtitle>
-                                            <Card.Text>{object.nbEtudiants} participants</Card.Text>
-                                        </Card.Body>
-                                    </Card>
+                                {oldData?.map((object) => (
+                                    <TchatCard key={object.id} element={object} />
                                 ))}
                             </Card.Text>
-                            <Link to="/tchat/liste/old"><button class="btn btn-primary" type="submit">Anciens Tchats</button></Link>
+                            <Link to="/tchat/liste/old"><button className="btn btn-primary" type="submit">Anciens tchats</button></Link>
                         </Card.Body>
                     </Card>
                 </div>
                 <div className="col">
-                    <Card >
+                    <Card className="mb-3" >
                         <Card.Body>
-                            <Card.Title>Liste des tchats en cours</Card.Title>
-                            <Card.Text>
-                                <Card.Body>
-                                    <Card.Text style={{ display: "flex", gap: "5px", flexWrap: "wrap" }}>
-                                        {coursActuels.map((object) => (
-                                            <Card
-                                                style={{ width: '18rem' }}
-                                                className="mb-2"
-                                            >
-                                                <Card.Header>{object.cours}</Card.Header>
-
-                                                <Card.Body>
-                                                    <Card.Title>{object.cours}</Card.Title>
-                                                    <Card.Subtitle>{object.professeur}</Card.Subtitle>
-                                                    <Card.Subtitle>{object.dates},{object.heures}</Card.Subtitle>
-                                                    <Card.Text>{object.nbEtudiants} participants</Card.Text>
-                                                </Card.Body>
-                                            </Card>
-                                        ))}
-                                    </Card.Text>
-                                </Card.Body>
+                            <Card.Title>Tchats en cours</Card.Title>
+                            <Card.Text style={{ display: "flex", gap: "5px", flexWrap: "wrap" }}>
+                                {currentData?.map((object) => (
+                                    <TchatCard key={object.id} content={object} />
+                                ))}
                             </Card.Text>
+                            <Link to="/tchat/liste/current"><button className="btn btn-primary" type="submit">Tchats en cours</button></Link>
                         </Card.Body>
                     </Card>
-                    <Card >
+                    <Card className="mb-3" >
                         <Card.Body>
-                            <Card.Title>Liste des prochains tchats</Card.Title>
-                            <Card.Text>
-                                <Card.Body>
-                                    <Card.Text style={{ display: "flex", gap: "5px", flexWrap: "wrap" }}>
-                                        {futurCours.map((object) => (
-                                            <Card
-                                                style={{ width: '18rem' }}
-                                                className="mb-2"
-                                            >
-                                                <Card.Header>{object.cours}</Card.Header>
-
-                                                <Card.Body>
-                                                    <Card.Title>{object.cours}</Card.Title>
-                                                    <Card.Subtitle>{object.professeur}</Card.Subtitle>
-                                                    <Card.Subtitle>{object.dates},{object.heures}</Card.Subtitle>
-                                                    <Card.Text>{object.nbEtudiants} participants</Card.Text>
-                                                </Card.Body>
-                                            </Card>
-                                        ))}
-                                    </Card.Text>
-                                </Card.Body>
-                                <Link to="/tchat/liste/new"><button class="btn btn-primary" type="submit">Nouveaux cours</button></Link>
+                            <Card.Title>Prochains tchats</Card.Title>
+                            <Card.Text style={{ display: "flex", gap: "5px", flexWrap: "wrap" }}>
+                                {newData?.map((object) => (
+                                    <TchatCard key={object.id} content={object} />
+                                ))}
                             </Card.Text>
+                            <Link to="/tchat/liste/new"><button className="btn btn-primary" type="submit">Prochains tchats</button></Link>
                         </Card.Body>
                     </Card>
-                    {props.type == "teacher" &&
-                        <Card >
+                    {props.type === "teacher" &&
+                        <Card className="mb-3" >
                             <Card.Body>
                                 <Card.Title>Créer un nouveau tchat</Card.Title>
-                                <Link to="create"><button class="btn btn-primary" type="submit">Créer</button></Link>
+                                <Link to="create"><button className="btn btn-primary" type="submit">Créer</button></Link>
                             </Card.Body>
                         </Card>
                     }
@@ -152,7 +78,5 @@ const TchatAccueil = props => {
         </div>
     )
 }
-
-TchatAccueil.propTypes = {}
 
 export default TchatAccueil

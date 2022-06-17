@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet, useRoutes } from 'react-router-dom';
-import Listes from './pages/Listes';
+import Listes from './components/Tchat/Listes';
 /**
  * Layouts
  */
@@ -54,15 +54,16 @@ const App = () => {
         { path: 'planning', element: <PlanningView /> },
         { path: 'login', element: <LoginView /> },
         { path: 'tchat', children: [
-          { path: '', element: <TchatAccueil type="ded"/>},
+          { path: '', element: <TchatAccueil type="student"/>},
+          { path: ':id', element: <Tchat />},
           { path: 'liste', children: [
             { path: 'old', element: <Listes affichage="Anciens"/> },
             { path: 'new', element: <Listes affichage="Nouveaux"/> },
+            { path: 'current', element: <Listes affichage="En cours"/> },
           ]},
-          { path: '*', element: <Tchat />},
           { path: 'create', element: <TchatCreate />},
           { path: 'update', children: [
-            { path: '*', element: <TchatUpdate />},
+            { path: ':id', element: <TchatUpdate />},
           ]},
         ]},
         { path: 'contact', element: <ContactView /> },

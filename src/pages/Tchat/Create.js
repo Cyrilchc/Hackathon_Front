@@ -1,21 +1,31 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { FloatingLabel, Form } from 'react-bootstrap'
 import Select from 'react-select'
 import moment from 'moment'
 import { BiArrowBack } from 'react-icons/bi'
+import axios from 'axios'
 
 const TchatCreate = () => {
-	let students = [
-		{label: 'Etudiant 1', value: '1'},
-		{label: 'Etudiant 2', value: '2'},
-	];
+	let [students, setStudents] = React.useState([]);
+	let [selectedParticipants, setSelectedParticipants] = React.useState(null);
+
+	useEffect(() => {
+		axios.get('http://172.19.2.11:5000/api/Student/GetStudents').then(res => {
+			setStudents(res.data.map(student => { return { value: student.id, label: `${student.lastname} ${student.surname}`}; }));
+		});
+	}, []);
 
 	let onCreate = () => {
 		let tchat = {
-			chatName: document.getElementById('title').value,
-			startDateTime: moment(document.getElementById('datetime').value, ["DD/MM/YYYY h:mm"]).toISOString(),
+			name: document.getElementById('title').value,
+			comment: document.getElementById('comment').value,
+			chatAffectations: selectedParticipants ? selectedParticipants.map(participant => { return { id: participant.value }; }) : [],
+			startDateTime: moment(document.getElementById('startdatetime').value, ["DD/MM/YYYY h:mm"]).toISOString(),
+			endDateTime: moment(document.getElementById('enddatetime').value, ["DD/MM/YYYY h:mm"]).toISOString(),
 		}
+		console.log(tchat);
+		// axios.post('http://172.19.2.11:5000/api/Chat/CreateChat', tchat);
 	}
 
 	return (
@@ -34,25 +44,22 @@ const TchatCreate = () => {
 					</div>
 					<div className='form-floating mb-2'>
 						<h6>Participants :</h6>
-						<Select options={students} isMulti name="students" />
+						<Select onChange={setSelectedParticipants} options={students} isMulti name="students" />
 					</div>
 					<div className='form-floating mb-2'>
-						<input type='text' className='form-control' id='datetime' placeholder='datetime' defaultValue={moment().format("DD/MM/YYYY h:mm")} />
-						<label htmlFor='datetime'>Date et heure</label>
+						<input type='text' className='form-control' id='startdatetime' placeholder='datetime' defaultValue={moment().format("DD/MM/YYYY h:mm")} />
+						<label htmlFor='startdatetime'>Date et heure de début</label>
+					</div>
+					<div className='form-floating mb-2'>
+						<input type='text' className='form-control' id='enddatetime' placeholder='datetime' defaultValue={moment().add(1, 'hour').format("DD/MM/YYYY h:mm")} />
+						<label htmlFor='enddatetime'>Date et heure de fin</label>
 					</div>
 					<FloatingLabel
 						label='Commentaires'
 						className='mb-2'
 					>
-						<Form.Control as="textarea" placeholder="comments"></Form.Control>
+						<Form.Control id="comment" as="textarea" placeholder="comments"></Form.Control>
 					</FloatingLabel>
-					<div className='form-floating mb-2'>
-						<h5>Notifications :</h5>
-						<div className='form-check'>
-							<input className="form-check-input" type="checkbox" value="" id="notifications" defaultChecked={true} />
-							<label className="form-check-label" htmlFor="notifications">Notifier les participants</label>
-						</div>
-					</div>
 					<div className='d-grid gap-2 col-6 mx-auto'>
 						<button className='btn btn-primary' onClick={onCreate}>Créer</button>
 					</div>
