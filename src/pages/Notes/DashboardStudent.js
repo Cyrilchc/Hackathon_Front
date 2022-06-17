@@ -22,6 +22,9 @@ const NotesStudentDashboardView = () => {
     return sum / notesArray.length;
   };
 
+  // function to get the average of the notes by subject
+    
+ 
   const fetchStudent = async () => await ClassService.find(id).then((res) => setData(res));
   const fetchGrades = async () => await GradeService.find(id).then((res) => setNote(res));
   const dataItem = {
@@ -76,7 +79,7 @@ const NotesStudentDashboardView = () => {
                           <tr>
                             <td>{data.lastName}</td>
                             <td>{data.surname ? data.surname : "Vide"}</td>
-                            <td>{calculateAverage(note)}</td>
+                            <td>{note.length > 0 ? `${calculateAverage(note).toFixed(2)}/20` : "Aucune note"}</td>
                           </tr>
                         ) : null}
                       </tbody>
@@ -100,7 +103,7 @@ const NotesStudentDashboardView = () => {
                               <td>{notes.score}/20</td>
                             </tr>
                           )
-                        }) : <tr><td colSpan={100}>Aucune donnee</td></tr>}
+                        }) : <tr><td colSpan={100}>Aucune note</td></tr>}
                       </tbody>
                     </Table>
                   </Container>
