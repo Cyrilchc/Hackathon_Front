@@ -7,6 +7,8 @@ const NotesTeacherDashboardView = () => {
     const [data, setData] = React.useState();
     const [group, setGroup] = React.useState();
     const [student, setStudent] = React.useState();
+   
+
     const [moyGenerale, setMoyenneGenerale] = React.useState();
 
     const [schoolClass, setSchoolClass] = React.useState(null);
@@ -60,6 +62,9 @@ const NotesTeacherDashboardView = () => {
     React.useEffect(() => {
         axios.get(`http://172.19.2.11:5000/api/Group/GetGroups`).then((res) => {
             setGroup(res.data);
+ 
+
+
             fetchGroupData(res.data[0].id);
         });
     }, []);
@@ -77,6 +82,7 @@ const NotesTeacherDashboardView = () => {
                                 fetchGroupData(e.target.value);
                             }}
                         >
+
                             {group?.map((group) => (
                                 <option key={group.id} id={group.id} value={group.id}>
                                     {group.name}
@@ -98,6 +104,7 @@ const NotesTeacherDashboardView = () => {
                             <tbody>
                                 {data &&
                                     data.students.map((student) => (
+
                                         <tr
                                             key={student.id}
                                             onClick={() => {
@@ -109,6 +116,7 @@ const NotesTeacherDashboardView = () => {
                                             <td>{student.grades.length > 0 ? `${calculateAverage(student.grades).toFixed(2)}/20` : "Aucune note"}</td>
                                         </tr>
                                     ))}
+
                                 <tr>
                                     <td colSpan="2">
                                         <b>Moyenne générale de la classe :</b>
@@ -123,6 +131,7 @@ const NotesTeacherDashboardView = () => {
                 </Col>
                 <Col>
                     <Container className="p-3">
+
                         {student ? (
                             <>
                                 <h2>
